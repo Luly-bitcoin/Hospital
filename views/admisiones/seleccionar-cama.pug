@@ -1,0 +1,21 @@
+extends ../layout
+
+block content
+  h1.mb-4 Admisión de #{paciente.nombre} #{paciente.apellido}
+
+  .card.p-4
+    form(action="/admisiones/crear" method="POST")
+      input(type="hidden" name="dni" value=paciente.dni)
+
+      .mb-3
+        label.form-label Motivo de internación:
+        textarea.form-control(name="motivo" required placeholder="Describa el motivo de internación...")
+
+      .mb-3
+        label.form-label Seleccionar cama disponible:
+        select.form-select(name="id_cama" required)
+          each c in camas
+            option(value=c.id_cama)= `${c.codigo} - Habitación ${c.habitacion}`
+
+      button.btn.btn-success.mt-3(type="submit") Confirmar Admisión
+    a.btn.btn-secondary.mt-3(href="/admisiones") Volver a Admisiones

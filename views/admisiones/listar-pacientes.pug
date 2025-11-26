@@ -1,0 +1,21 @@
+extends ../layout
+
+block content
+  h1 Seleccionar Paciente para Admisión
+
+  table
+    thead
+      tr
+        th DNI
+        th Nombre
+        th Sexo
+        th Acción
+    tbody
+      each p in pacientes
+        tr
+          td= p.dni
+          td= p.apellido + ", " + p.nombre
+          td= p.sexo
+          td
+            a(href=`/admisiones/seleccionar-cama/${p.dni}`) Seleccionar
+    a(href="/admisiones") Volver a Admisiones
