@@ -1,0 +1,59 @@
+extends ../layout
+
+block content
+  h2.text-center.mb-4 Editar Paciente
+
+  .card.shadow.p-4
+    form(method="POST" action=`/pacientes/editar/${paciente.dni}`)
+      
+      .row.mb-3
+        .col
+          label.form-label DNI *
+          input.form-control(type="text" name="dni" value=paciente.dni disabled)
+        .col
+          label.form-label Nombre *
+          input.form-control(type="text" name="nombre" value=paciente.nombre required)
+      
+      .row.mb-3
+        .col
+          label.form-label Apellido *
+          input.form-control(type="text" name="apellido" value=paciente.apellido required)
+        .col
+          label.form-label Sexo
+          select.form-control(name="sexo")
+            option(value="") Seleccionar
+            option(value="Masculino" selected=paciente.sexo==='Masculino') Masculino
+            option(value="Femenino" selected=paciente.sexo==='Femenino') Femenino
+
+      .row.mb-3
+        .col
+          label.form-label Dirección *
+          input.form-control(type="text" name="direccion" value=paciente.direccion required)
+        .col
+          label.form-label Localidad *
+          input.form-control(type="text" name="localidad" value=paciente.localidad required)
+
+      .row.mb-3
+        .col
+          label.form-label Fecha de nacimiento
+          input.form-control(type="date" name="fecha_nacimiento" value=paciente.fecha_nacimiento ? paciente.fecha_nacimiento.toISOString().substring(0,10) : "")
+        .col
+          label.form-label Edad
+          input.form-control(type="number" name="edad" value=paciente.edad)
+
+      .row.mb-3
+        .col
+          label.form-label Teléfono *
+          input.form-control(type="text" name="telefono" value=paciente.telefono required)
+        .col
+          label.form-label Teléfono de emergencia
+          input.form-control(type="text" name="tel_emergencia" value=paciente.tel_emergencia)
+
+      .row.mb-3
+        .col
+          label.form-label Nombre dueño del teléfono
+          input.form-control(type="text" name="nombre_dueno" value=paciente.nombre_dueno)
+
+      .d-flex.gap-3.mt-4
+        button.btn.btn-success(type="submit") Guardar cambios
+        a.btn.btn-secondary(href="/pacientes/lista-pacientes") Cancelar

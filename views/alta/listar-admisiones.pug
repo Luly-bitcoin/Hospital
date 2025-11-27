@@ -1,0 +1,24 @@
+extends ../layout
+
+block content
+  h1.mb-4 Altas de Pacientes
+
+  .card.p-3
+    if admisiones.length === 0
+      p No hay pacientes para dar el alta.
+    else
+      table.table.table-hover
+        thead
+          tr
+            th Paciente
+            th DNI
+            th Cama
+            th Acción
+        tbody
+          each a in admisiones
+            tr
+              td #{a.apellido}, #{a.nombre}
+              td #{a.dni}
+              td #{a.cama}
+              td
+                a.btn.btn-danger.btn-sm(href=`/alta/procesar/${a.id_admision}`) Dar Alta

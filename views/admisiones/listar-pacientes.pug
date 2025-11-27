@@ -1,21 +1,22 @@
 extends ../layout
 
 block content
-  h1 Seleccionar Paciente para Admisión
+  h1.mb-4 Seleccionar Paciente para Admisión
 
-  table
-    thead
-      tr
-        th DNI
-        th Nombre
-        th Sexo
-        th Acción
-    tbody
-      each p in pacientes
+  .card.p-3
+    table.table.table-hover
+      thead
         tr
-          td= p.dni
-          td= p.apellido + ", " + p.nombre
-          td= p.sexo
-          td
-            a(href=`/admisiones/seleccionar-cama/${p.dni}`) Seleccionar
-    a(href="/admisiones") Volver a Admisiones
+          th DNI
+          th Nombre
+          th Sexo
+          th Acción
+      tbody
+        each p in pacientes
+          tr
+            td= p.dni
+            td= p.apellido + ", " + p.nombre
+            td= p.sexo
+            td
+              a.btn.btn-sm.btn-primary(href=`/admisiones/seleccionar-cama/${p.dni}`) Seleccionar
+    a.btn.btn-secondary.mt-3(href="/admisiones") Volver a Admisiones

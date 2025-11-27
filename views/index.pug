@@ -1,7 +1,16 @@
-doctype html
-html
-  head
-    title HIS Internación
-  body
-    h1 Bienvenido al Sistema HIS - Internación
-    p Proyecto base creado correctamente.
+extends layout
+
+block content
+  .index-container
+    .titulo-principal
+      h1 Bienvenido al Sistema HIS - Internación
+      br
+
+    // IMÁGENES
+    .imagenes-container
+      img.imagen(src="/img/hospital .jpg", alt="Imagen 1")
+      img.imagen(src="/img/hospital2.jpg", alt="Imagen 2")
+      img.imagen(src="/img/hospital3.jpg", alt="Imagen 3")
+    // BOTÓN EMERGENCIA
+    .emergencia-container
+      a.emergencia-btn(href="/emergencia") Emergencia

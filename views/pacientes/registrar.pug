@@ -1,0 +1,75 @@
+extends ../layout
+
+block content
+  h2.text-center.mb-4 Registrar Paciente
+
+  .card.shadow.p-4
+    // ====== BUSCAR POR DNI ======
+    form#formBuscar.d-flex.gap-2.mb-4
+      input#dni.form-control(type="number" placeholder="Ingrese DNI")
+      button#btnBuscar.btn.btn-secondary(type="button") Buscar
+
+    p#mensaje.text-danger.fw-bold
+
+    // ====== FORMULARIO COMPLETO ======
+    form#formGuardar(method="POST" action="/pacientes/guardar")
+      .row.mb-3
+        .col
+          label.form-label DNI *
+          input.form-control(type="number" name="dni" id="dni_form")  
+
+      .row.mb-3
+        .col
+          label.form-label Nombre *
+          input.form-control(type="text" name="nombre" id="nombre")
+
+        .col
+          label.form-label Apellido *
+          input.form-control(type="text" name="apellido" id="apellido")
+
+      .row.mb-3
+        .col
+          label.form-label Dirección *
+          input.form-control(type="text" name="direccion" id="direccion")
+
+        .col
+          label.form-label Localidad *
+          input.form-control(type="text" name="localidad" id="localidad")
+
+      .row.mb-3
+        .col
+          label.form-label Fecha de Nacimiento
+          input.form-control(type="date" name="fecha_nacimiento" id="fecha_nacimiento")
+
+      .row.mb-3
+        .col
+          label.form-label Sexo
+          select.form-select(name="sexo" id="sexo")
+            option(value="" selected disabled) Seleccione
+            option(value="M") Masculino
+            option(value="F") Femenino
+            option(value="N") Otro
+
+      .row.mb-3
+        .col
+          label.form-label Edad
+          input.form-control(type="number" name="edad" id="edad")
+
+        .col
+          label.form-label Teléfono *
+          input.form-control(type="text" name="telefono" id="telefono")
+
+      .row.mb-3
+        .col
+          label.form-label Teléfono de emergencia
+          input.form-control(type="text" name="tel_emergencia" id="tel_emergencia")
+
+        .col
+          label.form-label Dueño del teléfono
+          input.form-control(type="text" name="nombre_dueno" id="nombre_dueno")
+
+      .d-flex.gap-3.mt-4
+        button.btn.btn-success(type="submit" id="btnGuardar") Guardar
+        button#btnLimpiar.btn.btn-warning(type="button") Limpiar
+
+  script(src="/js/pacientes.js")

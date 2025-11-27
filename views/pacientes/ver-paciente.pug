@@ -1,0 +1,131 @@
+extends ../layout
+
+block content
+  h2.text-center.mb-4 Ver paciente
+
+  .card.shadow.p-4
+    // ==== DATOS PERSONALES ====
+    .mb-4
+      h4 Datos personales
+      dl.row
+        dt.col-sm-3 DNI
+        dd.col-sm-9 #{paciente.dni}
+        dt.col-sm-3 Nombre
+        dd.col-sm-9 #{paciente.nombre} #{paciente.apellido}
+        dt.col-sm-3 Sexo
+        dd.col-sm-9 #{paciente.sexo || '-'}
+        dt.col-sm-3 Fecha nacimiento
+        dd.col-sm-9 #{paciente.fecha_nacimiento ? new Date(paciente.fecha_nacimiento).toLocaleDateString() : '-'}
+        dt.col-sm-3 Edad
+        dd.col-sm-9 #{paciente.edad || '-'}
+        dt.col-sm-3 Teléfono
+        dd.col-sm-9 #{paciente.telefono || '-'}
+        dt.col-sm-3 Tel. emergencia
+        dd.col-sm-9 #{paciente.tel_emergencia || '-'}
+        dt.col-sm-3 Nombre dueño (tel)
+        dd.col-sm-9 #{paciente.nombre_dueno || '-'}
+        dt.col-sm-3 Dirección
+        dd.col-sm-9 #{paciente.direccion || '-'}
+        dt.col-sm-3 Localidad
+        dd.col-sm-9 #{paciente.localidad || '-'}
+        dt.col-sm-3 Creado
+        dd.col-sm-9 #{paciente.created_at ? new Date(paciente.created_at).toLocaleString("es-AR") : '-'}
+
+    hr
+
+    // ==== ADMISIONES / HISTORIAL ====
+    if admisiones.length === 0
+      p.text-muted No hay admisiones registradas para este paciente.
+    else
+      each admision, idx in admisiones
+        // Mostrar primero la admisión activa (estado === 'activa') — en orden ya vienen por fecha (más reciente arriba)
+        .mb-4.border.rounded.p-3(style= idx === 0 ? "background:#f8f9fa" : "")
+          .d-flex.justify-content-between.align-items-center.mb-2
+            h5.mb-0 Admisión - #{admision.estado ? admision.estado.toUpperCase() : 'N/A'}
+            small.text-muted #{admision.fecha_ingreso_str || '-'}
+          // Resumen admisión
+          .mb-2
+            p.mb-1
+              strong Motivo: 
+              |  #{admision.motivo || '-'}
+            p.mb-1
+              strong Cama: 
+              |  #{admision.cama_codigo || '-'}
+              |  — Hab: #{admision.habitacion_numero || '-'} 
+              |  — Ala: #{admision.ala_nombre || '-'}
+            p.mb-1
+              strong Registrado por:
+              |  #{admision.usuario_nombre ? `${admision.usuario_nombre} (${admision.usuario_rol || 'ROL'})` : '-'}
+            if admision.fecha_egreso_str
+              p.mb-1
+                strong Fecha egreso:
+                |  #{admision.fecha_egreso_str}
+
+          // EVALUACIONES DE ENFERMERIA
+          h6.mt-3 Evaluaciones de Enfermería
+          if admision.evaluaciones_enfermeria.length === 0
+            p.text-muted Ninguna evaluación de enfermería registrada.
+          else
+            each ev in admision.evaluaciones_enfermeria
+              .card.mb-2.p-2
+                .d-flex.justify-content-between
+                  small.text-muted #{ev.fecha_registro_str || '-'}
+                  small.text-muted #{ev.usuario_nombre ? `${ev.usuario_rol ? ev.usuario_rol.toLowerCase() : 'usuario'} ${ev.usuario_nombre}` : '-'}
+                p.mb-1
+                  strong Antecedentes: 
+                  |  #{ev.antecedentes || '-'}
+                p.mb-1
+                  strong Alergias: 
+                  |  #{ev.alergias || '-'}
+                p.mb-1
+                  strong Medicamentos: 
+                  |  #{ev.medicamentes || '-'}
+                p.mb-1
+                  strong Motivo internación: 
+                  |  #{ev.motivo_internacion || '-'}
+                p.mb-1
+                  strong Signos vitales: 
+                  |  Temp: #{ev.signos_vitales_temp || '-'} °C — FC: #{ev.signos_vitales_fc || '-'} — FR: #{ev.signos_vitales_fr || '-'} — PA: #{ev.signos_vitales_pa || '-'}
+
+          // EVALUACIONES MEDICAS
+          h6.mt-3 Evaluaciones Médicas
+          if admision.evaluaciones_medicas.length === 0
+            p.text-muted Ninguna evaluación médica registrada.
+          else
+            each em in admision.evaluaciones_medicas
+              .card.mb-2.p-2
+                .d-flex.justify-content-between
+                  small.text-muted #{em.fecha_registro_str || '-'}
+                  small.text-muted #{em.usuario_nombre ? `${em.usuario_rol ? em.usuario_rol.toLowerCase() : 'usuario'} ${em.usuario_nombre}` : '-'}
+                p.mb-1
+                  strong Diagnóstico: 
+                  |  #{em.diagnostico || '-'}
+                p.mb-1
+                  strong Estudios: 
+                  |  #{em.estudios || '-'}
+                p.mb-1
+                  strong Tratamiento: 
+                  |  #{em.tratamiento || '-'}
+                p.mb-1
+                  strong Evolución: 
+                  |  #{em.evolucion || '-'}
+
+          // ALTAS
+          h6.mt-3 Altas
+          if admision.altas.length === 0
+            p.text-muted Sin altas registradas para esta admisión.
+          else
+            each alta in admision.altas
+              .card.mb-2.p-2
+                .d-flex.justify-content-between
+                  small.text-muted #{alta.fehca_alta_str || '-'}
+                  small.text-muted #{alta.usuario_nombre ? `${alta.usuario_rol ? alta.usuario_rol.toLowerCase() : 'usuario'} ${alta.usuario_nombre}` : '-'}
+                p.mb-1
+                  strong Indicaciones:
+                  |  #{alta.indicaciones || '-'}
+
+          // Enlaces de acción
+          .mt-3
+            a.btn.btn-sm.btn-warning.me-2(href=`/pacientes/editar/${paciente.dni}`) Editar paciente
+            a.btn.btn-sm.btn-secondary(href="/pacientes/lista-pacientes") Volver a lista
+

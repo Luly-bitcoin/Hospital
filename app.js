@@ -10,7 +10,8 @@ import admisionesRouter from "./routes/admisiones.js";
 import enfermeriaRouter from "./routes/enfermeria.js";
 import camasRouter from "./routes/camas.js";
 import altaRouter from "./routes/alta.js";
-
+import medicoRouter from "./routes/medico.js";
+import pacientesRouter from "./routes/pacientes.js";
 
 dotenv.config();
 
@@ -44,6 +45,8 @@ app.use("/admisiones", admisionesRouter);
 app.use("/enfermeria", enfermeriaRouter);
 app.use("/camas", camasRouter);
 app.use("/alta", altaRouter);
+app.use("/medico", medicoRouter);
+app.use("/pacientes", pacientesRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

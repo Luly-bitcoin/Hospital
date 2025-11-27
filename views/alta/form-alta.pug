@@ -1,0 +1,16 @@
+extends ../layout
+
+block content
+  h1.mb-4 Dar Alta al Paciente
+
+  .card.p-4
+    h4 Paciente: #{admision.nombre} #{admision.apellido}
+    p Cama asignada: #{admision.cama}
+
+    form(action="/alta/guardar" method="POST")
+      input(type="hidden" name="id_admision" value=admision.id_admision)
+
+      p.mb-3
+        | ¿Confirmar alta del paciente? Se liberará la cama y se cerrará la admisión.
+
+      button.btn.btn-success(type="submit") Confirmar Alta

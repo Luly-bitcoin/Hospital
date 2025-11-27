@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+  h1.mb-4 Evaluación Inicial de Enfermería
+
+  .card.p-3
+    if admisiones.length === 0
+      p No hay pacientes internados actualmente.
+    else
+      table.table.table-hover
+        thead
+          tr
+            th Paciente
+            th DNI
+            th Acción
+        tbody
+          each a in admisiones
+            tr
+              td #{a.apellido}, #{a.nombre}
+              td #{a.dni}
+              td
+                a.btn.btn-primary.btn-sm(href=`/enfermeria/evaluar/${a.id_admision}`) Evaluar

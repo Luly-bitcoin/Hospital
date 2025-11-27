@@ -1,0 +1,53 @@
+extends ../layout
+
+block content
+  h1.mb-4 Evolución Médica
+
+  h3.mb-4 Paciente: #{admision.nombre} #{admision.apellido} (#{admision.dni})
+
+  .card.p-4.mb-4
+    form(action="/medico/guardar" method="POST")
+      input(type="hidden" name="id_admision" value=admision.id_admision)
+
+      .mb-3
+        label.form-label Diagnóstico
+        textarea.form-control(name="diagnostico" rows="2" required)
+
+      .mb-3
+        label.form-label Estudios Solicitados
+        textarea.form-control(name="estudios" rows="2")
+
+      .mb-3
+        label.form-label Tratamiento
+        textarea.form-control(name="tratamiento" rows="2")
+
+      .mb-3
+        label.form-label Evolución Clínica
+        textarea.form-control(name="evolucion" rows="3" required)
+
+      button.btn.btn-success.mt-3(type="submit") Guardar Evolución
+
+  hr
+
+  h3.mb-3 Historial de Evolución
+
+  if historial.length === 0
+    p No hay registros médicos todavía.
+  else
+    .card.p-3
+      table.table.table-striped
+        thead
+          tr
+            th Fecha
+            th Diagnóstico
+            th Estudios
+            th Tratamiento
+            th Evolución
+        tbody
+          each ev in historial
+            tr
+              td= ev.fecha_registro.toLocaleString()
+              td= ev.diagnostico
+              td= ev.estudios || "-"
+              td= ev.tratamiento || "-"
+              td= ev.evolucion

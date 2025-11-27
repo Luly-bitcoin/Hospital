@@ -1,0 +1,116 @@
+/* ------------------------------ */
+/* HEADER GENERAL                 */
+/* ------------------------------ */
+.header {
+  background: #004a8f;
+  padding: 10px 20px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  width: 60px;
+  height: 60px;
+}
+
+.nombre-hospital {
+  font-size: 22px;
+  margin: 0;
+}
+
+.menu a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+  font-weight: bold;
+}
+
+.menu a:hover {
+  text-decoration: underline;
+}
+
+/* ------------------------------ */
+/* INDEX                          */
+/* ------------------------------ */
+
+.index-container {
+  text-align: center;
+  padding: 30px;
+}
+
+.titulo-principal h2 {
+  font-size: 28px;
+  color: #003c77;
+}
+
+.emergencia-container {
+  margin: 15px 0 25px;
+}
+
+.emergencia-btn {
+  display: inline-block;
+  background: #d10000;
+  color: white;
+  padding: 12px 20px;
+  font-size: 22px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  border: 3px solid #850000;
+  transition: .2s;
+}
+
+.emergencia-btn:hover {
+  background: #850000;
+  transform: scale(1.05);
+}
+
+.imagenes-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.imagen {
+  width: 30%;
+  max-width: 300px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* ------------------------------ */
+/* FOOTER                         */
+/* ------------------------------ */
+.footer {
+  text-align: center;
+  padding: 15px;
+  background: #00325e;
+  color: white;
+  margin-top: 40px;
+}
+
+/* ------------------------------ */
+/* RESPONSIVE                     */
+/* ------------------------------ */
+
+@media (max-width: 768px) {
+  .imagen {
+    width: 90%;
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+  }
+}

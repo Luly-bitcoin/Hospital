@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+  h2.text-center.mb-4 Lista de Pacientes
+
+  .card.shadow.p-4
+    // ====== Búsqueda ======
+    .d-flex.mb-3.gap-2
+      input#inputBuscar.form-control(type="text" placeholder="Buscar por DNI, nombre o apellido")
+      button#btnBuscar.btn.btn-primary(type="button") Buscar
+
+    // ====== Tabla de pacientes ======
+    table.table.table-striped#tablaPacientes
+      thead
+        tr
+          th DNI
+          th Nombre
+          th Apellido
+          th Acciones
+      tbody
+        // Se llenará dinámicamente con JS
+
+    script(src="/js/lista-pacientes.js")

@@ -1,0 +1,31 @@
+.cama {
+  width: 160px;
+  border-radius: 12px;
+  transition: transform .2s, box-shadow .2s;
+  cursor: pointer;
+}
+
+.cama[data-estado="libre"] {
+  background: #d4edda;
+  border-left: 6px solid #28a745;
+}
+
+.cama[data-estado="ocupada"] {
+  background: #f8d7da;
+  border-left: 6px solid #dc3545;
+}
+
+.cama[data-estado="mantenimiento"] {
+  background: #fff3cd;
+  border-left: 6px solid #ffc107;
+}
+
+.cama[data-estado="emergencia"] {
+  background: #d1ecf1;
+  border-left: 6px solid #17a2b8;
+}
+
+.cama:hover {
+  transform: scale(1.1);
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}

@@ -1,0 +1,36 @@
+extends ../layout
+
+block content
+  h2 Gestión de Camas
+
+  // FILTROS
+  .mb-3
+    .btn-group
+      button.btn.btn-secondary(data-filter="todas") Todas
+      button.btn.btn-success(data-filter="libre") Libres
+      button.btn.btn-danger(data-filter="ocupada") Ocupadas
+      button.btn.btn-warning(data-filter="mantenimiento") Higienización
+      button.btn.btn-info(data-filter="emergencia") Emergencias
+
+  each ala in alas
+    h2.text-primary.mt-4 #{ala.nombre}
+
+    each hab in habitaciones.filter(h => h.id_ala === ala.id_ala)
+      - const camasHab = camas.filter(c => c.id_habitacion === hab.id_habitacion);
+
+      if camasHab.length > 0
+        .card.p-3.mb-3
+          h4 Habitación #{hab.numero}
+
+          .d-flex.flex-wrap.gap-3
+            each c in camasHab
+              .cama.box-shadow.p-3.text-center(
+                data-estado=c.estado
+                data-id=c.id_cama
+              )
+                h5 #{c.codigo}
+                p Estado: #{c.estado}
+                if c.sexo_paciente
+                  p Paciente: #{c.sexo_paciente}
+                else
+                  p Paciente: -
