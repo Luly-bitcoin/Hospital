@@ -5,8 +5,8 @@ const router = Router();
 
 // Listar pacientes para elegir
 router.get("/", async (req, res) => {
-    const [pacientes] = await db.query("SELECT * FROM pacientes ORDER BY apellido");
-    res.render("admisiones/listar-pacientes", { pacientes });
+    const [pacientes] = await db.query("SELECT * FROM pacientes p WHERE NOT EXISTS (SELECT 1 FROM internaciones i WHERE i.dni_paciente = p.dni AND i.fecha_egreso IS NULL)");
+    res.render("internaciones/listar-pacientes", { pacientes });
 });
 
 // Ver camas disponibles para un paciente
@@ -24,7 +24,7 @@ router.get("/seleccionar-cama/:dni", async (req, res) => {
         WHERE c.estado IN ('libre','higienizando')
     `);
 
-    res.render("admisiones/seleccionar-cama", { paciente, camas });
+    res.render("internaciones/seleccionar-cama", { paciente, camas });
 });
 
 // Registrar admisión
@@ -53,7 +53,7 @@ router.post("/crear", async (req, res) => {
             // Buscar sexo del paciente en la otra cama
             const [[admOcupada]] = await db.query(
                 `SELECT p.sexo 
-                 FROM admisiones a 
+                 FROM internaciones a 
                  JOIN pacientes p ON p.dni = a.dni_paciente
                  WHERE a.id_cama = ? AND a.estado = 'activa'`,
                 [otraCama.id_cama]
@@ -67,19 +67,19 @@ router.post("/crear", async (req, res) => {
 
     // Registrar admisión
     await db.query(
-        "INSERT INTO admisiones (dni_paciente, motivo, id_cama) VALUES (?,?,?)",
+        "INSERT INTO internaciones (dni_paciente, motivo, id_cama) VALUES (?,?,?)",
         [dni, motivo, id_cama]
     );
 
     // Actualizar estado de la cama
     await db.query("UPDATE camas SET estado = 'ocupada' WHERE id_cama = ?", [id_cama]);
 
-    res.redirect("/admisiones/confirmacion");
+    res.redirect("/internaciones/confirmacion");
 });
 
 // Página de confirmación
 router.get("/confirmacion", (req, res) => {
-    res.render("admisiones/confirmacion");
+    res.render("internaciones/confirmacion");
 });
 
 export default router;

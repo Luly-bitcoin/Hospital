@@ -6,12 +6,14 @@ import dotenv from "dotenv";
 import { fileURLToPath } from "url";
 import router from "./routes/index.js";
 import db from "./config/db.js";
-import admisionesRouter from "./routes/admisiones.js";
+import internacionesRouter from "./routes/internaciones.js";
 import enfermeriaRouter from "./routes/enfermeria.js";
 import camasRouter from "./routes/camas.js";
 import altaRouter from "./routes/alta.js";
 import medicoRouter from "./routes/medico.js";
 import pacientesRouter from "./routes/pacientes.js";
+import turnosRouter from "./routes/turnos.js";
+import bodyParser from "body-parser";
 
 dotenv.config();
 
@@ -31,6 +33,8 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -41,12 +45,13 @@ try {
 }catch (error) {
     console.error("Error de conexión a la base de datos:", error);
 }
-app.use("/admisiones", admisionesRouter);
+app.use("/internaciones", internacionesRouter);
 app.use("/enfermeria", enfermeriaRouter);
 app.use("/camas", camasRouter);
 app.use("/alta", altaRouter);
 app.use("/medico", medicoRouter);
 app.use("/pacientes", pacientesRouter);
+app.use("/turnos", turnosRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

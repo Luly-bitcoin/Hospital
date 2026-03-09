@@ -4,7 +4,7 @@ block content
   h1.mb-4 Altas de Pacientes
 
   .card.p-3
-    if admisiones.length === 0
+    if internaciones.length === 0
       p No hay pacientes para dar el alta.
     else
       table.table.table-hover
@@ -15,10 +15,10 @@ block content
             th Cama
             th Acción
         tbody
-          each a in admisiones
+          each a in internaciones
             tr
               td #{a.apellido}, #{a.nombre}
               td #{a.dni}
               td #{a.cama}
               td
-                a.btn.btn-danger.btn-sm(href=`/alta/procesar/${a.id_admision}`) Dar Alta
+                a.btn.btn-danger.btn-sm(href=`/alta/procesar/${a.internacion}`) Dar Alta

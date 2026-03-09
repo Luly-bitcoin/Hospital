@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  h1 Turnos Pendientes
+
+  a.btnNuevo(href="/turnos/nuevo") Nuevo Turno
+
+  table.table-turnos
+    thead
+      tr
+        th Paciente
+        th Médico
+        th Fecha y Hora
+        th Estado
+        th Acciones
+    tbody
+      each turno in turnos
+        tr
+          td= turno.nombre_paciente + " " + turno.apellido_paciente
+          td= turno.nombre_medico + " " + turno.apellido_medico
+          td= new Date(turno.fecha_solicitada).toLocaleString()
+          td= turno.estado
+          td
+            a.btn-editar(href=`/turnos/editar/${turno.id_turno}`) Editar
+            a.btn-cancelar(href=`/turnos/cancelar/${turno.id_turno}`) Cancelar
+
+    

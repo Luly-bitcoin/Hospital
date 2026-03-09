@@ -114,3 +114,53 @@
     text-align: right;
   }
 }
+  .btnNuevo {
+    display: inline-block;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: 0.3s;
+  }
+  .btnNuevo:hover {
+    background-color: #218838;
+  }
+  .table-turnos {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  .table-turnos th, .table-turnos td {
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    text-align: left;
+  }
+  .table-turnos th {
+    background-color: #007bff;
+    color: white;
+  }
+  .table-turnos tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  .btn-editar, .btn-cancelar {
+    padding: 5px 10px;
+    margin-right: 5px;
+    text-decoration: none;
+    color: white;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+  .btn-editar {
+    background-color: #ffc107;
+  }
+  .btn-editar:hover {
+    background-color: #e0a800;
+  }
+  .btn-cancelar {
+    background-color: #dc3545;
+  }
+  .btn-cancelar:hover {
+    background-color: #c82333;
+  }

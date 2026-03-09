@@ -3,11 +3,11 @@ extends ../layout
 block content
   h1.mb-4 Evolución Médica
 
-  h3.mb-4 Paciente: #{admision.nombre} #{admision.apellido} (#{admision.dni})
+  h3.mb-4 Paciente: #{internacion.nombre} #{internacion.apellido} (#{internacion.dni})
 
   .card.p-4.mb-4
     form(action="/medico/guardar" method="POST")
-      input(type="hidden" name="id_admision" value=admision.id_admision)
+      input(type="hidden" name="id_internacion" value=internacion.id_internacion)
 
       .mb-3
         label.form-label Diagnóstico

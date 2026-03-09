@@ -3,45 +3,45 @@ import db from "../config/db.js";
 
 const router = Router();
 
-// LISTAR ADMISIONES ACTIVAS
+// LISTAR INTERNACIONES ACTIVAS
 router.get("/", async (req, res) => {
-    const [admisiones] = await db.query(`
-        SELECT a.id_admision, p.nombre, p.apellido, p.dni
-        FROM admisiones a
+    const [internaciones] = await db.query(`
+        SELECT a.id_internacion, p.nombre, p.apellido, p.dni
+        FROM internaciones a
         JOIN pacientes p ON p.dni = a.dni_paciente
         WHERE a.estado = 'activa'
     `);
 
-    res.render("medico/listar-admisiones", { admisiones });
+    res.render("medico/listar-admisiones", { internaciones });
 });
 
 // FORMULARIO + HISTORIAL
-router.get("/evaluar/:id_admision", async (req, res) => {
-    const { id_admision } = req.params;
+router.get("/evaluar/:id_internacion", async (req, res) => {
+    const { id_internacion } = req.params;
 
     // Datos del paciente
-    const [[admision]] = await db.query(`
+    const [[internacion]] = await db.query(`
         SELECT a.*, p.nombre, p.apellido, p.dni
-        FROM admisiones a
+        FROM internaciones a
         JOIN pacientes p ON p.dni = a.dni_paciente
-        WHERE a.id_admision = ?
-    `, [id_admision]);
+        WHERE a.id_internacion = ?
+    `, [id_internacion]);
 
     // Evolución médica desde tu tabla REAL
     const [historial] = await db.query(`
         SELECT *
         FROM d_eval_med
-        WHERE id_admision = ?
+        WHERE id_internacion = ?
         ORDER BY fecha_registro DESC
-    `, [id_admision]);
+    `, [id_internacion]);
 
-    res.render("medico/form-evolucion", { admision, historial });
+    res.render("medico/form-evolucion", { internacion, historial });
 });
 
 // GUARDAR EVOLUCIÓN
 router.post("/guardar", async (req, res) => {
     const {
-        id_admision,
+        ad_internacion,
         diagnostico,
         estudios,
         tratamiento,

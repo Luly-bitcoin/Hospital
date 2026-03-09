@@ -4,11 +4,11 @@ block content
   h1.mb-4 Dar Alta al Paciente
 
   .card.p-4
-    h4 Paciente: #{admision.nombre} #{admision.apellido}
-    p Cama asignada: #{admision.cama}
+    h4 Paciente: #{internacion.nombre} #{internacion.apellido}
+    p Cama asignada: #{internacion.cama}
 
     form(action="/alta/guardar" method="POST")
-      input(type="hidden" name="id_admision" value=admision.id_admision)
+      input(type="hidden" name="id_internacion" value=internacion.id_internacion)
 
       p.mb-3
         | ¿Confirmar alta del paciente? Se liberará la cama y se cerrará la admisión.

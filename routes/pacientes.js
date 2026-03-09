@@ -119,10 +119,10 @@ router.get("/ver/:dni", async (req, res) => {
     const [[paciente]] = await db.query("SELECT * FROM pacientes WHERE dni = ?", [dni]);
     if (!paciente) return res.status(404).send("Paciente no encontrado");
 
-    const [admisiones] = await db.query(
+    const [internaciones] = await db.query(
       `SELECT a.*, c.codigo AS cama_codigo, h.numero AS habitacion_numero, al.nombre AS ala_nombre,
               ur.id_usuario AS usuario_id, ur.nombre AS usuario_nombre, rr.nombre AS usuario_rol
-       FROM admisiones a
+       FROM internaciones a
        LEFT JOIN camas c ON a.id_cama = c.id_cama
        LEFT JOIN habitaciones h ON c.id_habitacion = h.id_habitacion
        LEFT JOIN alas al ON h.id_ala = al.id_ala
@@ -133,7 +133,7 @@ router.get("/ver/:dni", async (req, res) => {
       [dni]
     );
 
-    res.render("pacientes/ver-paciente", { paciente, admisiones });
+    res.render("pacientes/ver-paciente", { paciente, internaciones });
   } catch (err) {
     console.error(err);
     res.status(500).send("Error al cargar la información del paciente");
