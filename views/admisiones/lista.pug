@@ -1,0 +1,38 @@
+doctype html
+html
+    head
+        title Admisiones
+
+    body
+
+        h1 Admisiones
+
+        a(href="/dashboard")
+            | Dashboard
+
+        br
+        br
+
+        a(href="/admisiones/nueva")
+            | Nueva Admisión
+
+        br
+        br
+
+        table(border="1")
+
+            tr
+                th ID
+                th Paciente
+                th Fecha
+                th Estado
+                th Cama
+
+            each admision in admisiones
+
+                tr
+                    td= admision.id_admision
+                    td= admision.nombre + " " + admision.apellido
+                    td= admision.fecha_ingreso
+                    td= admision.estado
+                    td= admision.codigo

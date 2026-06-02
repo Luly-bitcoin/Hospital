@@ -1,0 +1,45 @@
+doctype html
+html
+    head
+        title Login
+
+    body
+
+        h1 Sistema HIS
+
+        form(action="/login" method="POST")
+
+            div
+                label Usuario
+                br
+                input(
+                    type="text"
+                    name="usuario"
+                    required
+                )
+
+            br
+
+            div
+                label Contraseña
+                br
+                input(
+                    type="password"
+                    name="password"
+                    required
+                )
+
+            br
+
+            button(type="submit")
+                | Ingresar
+
+        br
+
+        hr
+
+        p ¿No tienes usuario?
+
+        a(href="/register")
+            button(type="button")
+                | Registrarme

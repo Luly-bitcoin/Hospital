@@ -1,0 +1,52 @@
+doctype html
+html
+    head
+        title Nueva Admisión
+
+    body
+
+        h1 Nueva Admisión
+
+        form(action="/admisiones/nueva" method="POST")
+
+            label Paciente
+
+            br
+
+            select(name="dni_paciente")
+
+                each paciente in pacientes
+
+                    option(value=paciente.dni)
+                        = paciente.apellido + ", " + paciente.nombre
+
+            br
+            br
+
+            label Motivo
+
+            br
+
+            textarea(
+                name="motivo"
+            )
+
+            br
+            br
+
+            label Cama
+
+            br
+
+            select(name="id_cama")
+
+                each cama in camas
+
+                    option(value=cama.id_cama)
+                        = cama.codigo
+
+            br
+            br
+
+            button(type="submit")
+                | Guardar

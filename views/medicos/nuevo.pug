@@ -1,0 +1,45 @@
+doctype html
+html
+    head
+        title Nuevo Médico
+
+    body
+
+        h1 Registrar Médico
+
+        form(action="/medicos/guardar" method="POST")
+
+            p DNI
+            input(type="number" name="dni")
+
+            p Nombre
+            input(type="text" name="nombre")
+
+            p Apellido
+            input(type="text" name="apellido")
+
+            p Sexo
+
+            select(name="sexo")
+                option(value="M") Masculino
+                option(value="F") Femenino
+
+            p Fecha Nacimiento
+            input(type="date" name="fecha_nacimiento")
+
+            p Teléfono
+            input(type="text" name="telefono")
+
+            p Correo
+            input(type="email" name="correo_electronico")
+
+            p Especialidad
+            input(type="text" name="especialidad")
+
+            p Matrícula
+            input(type="text" name="matricula")
+
+            br
+
+            button(type="submit")
+                | Guardar Médico

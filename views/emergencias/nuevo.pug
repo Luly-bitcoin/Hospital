@@ -1,0 +1,48 @@
+doctype html
+html
+    head
+        title Nueva Emergencia
+
+    body
+
+        h1 Ingreso de Emergencia
+
+        form(
+            action="/emergencias/guardar"
+            method="POST"
+        )
+
+            p Sexo
+
+            select(name="sexo")
+
+                option(value="N")
+                    No identificado
+
+                option(value="M")
+                    Masculino
+
+                option(value="F")
+                    Femenino
+
+            p Descripción
+
+            textarea(
+                name="descripcion"
+            )
+
+            p Cama Emergencia
+
+            select(name="id_cama")
+
+                each cama in camas
+
+                    option(
+                        value=cama.id_cama
+                    )
+                        = cama.codigo
+
+            br
+
+            button(type="submit")
+                | Registrar

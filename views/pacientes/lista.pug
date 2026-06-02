@@ -1,0 +1,27 @@
+doctype html
+html
+    head
+        title Pacientes
+
+    body
+
+        h1 Pacientes
+
+        a(href="/pacientes/nuevo")
+            | Nuevo Paciente
+
+        table(border="1")
+
+            tr
+                th DNI
+                th Nombre
+                th Apellido
+                th Sexo
+
+            each paciente in pacientes
+
+                tr
+                    td= paciente.dni
+                    td= paciente.nombre
+                    td= paciente.apellido
+                    td= paciente.sexo

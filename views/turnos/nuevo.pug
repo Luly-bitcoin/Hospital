@@ -1,0 +1,45 @@
+doctype html
+html
+    head
+        title Nuevo Turno
+
+    body
+
+        h1 Nuevo Turno
+
+        form(action="/turnos/guardar" method="POST")
+
+            p Paciente
+
+            select(name="dni_paciente")
+
+                each paciente in pacientes
+
+                    option(value=paciente.dni)
+                        = paciente.apellido + ", " + paciente.nombre
+
+            p Médico
+
+            select(name="id_medico")
+
+                each medico in medicos
+
+                    option(value=medico.id_medico)
+                        = medico.apellido + ", " + medico.nombre
+
+            p Fecha y Hora
+
+            input(
+                type="datetime-local"
+                name="fecha_solicitada"
+            )
+
+            p Motivo
+
+            textarea(name="motivo")
+
+            br
+            br
+
+            button(type="submit")
+                | Guardar Turno

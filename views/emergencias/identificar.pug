@@ -1,0 +1,31 @@
+doctype html
+html
+    head
+        title Identificar Paciente
+
+    body
+
+        h1 Identificar Paciente
+
+        h3= emergencia.codigo_temporal
+
+        form(
+            method="POST"
+        )
+
+            select(
+                name="dni_paciente"
+            )
+
+                each paciente in pacientes
+
+                    option(
+                        value=paciente.dni
+                    )
+                        = paciente.apellido + ", " + paciente.nombre
+
+            br
+            br
+
+            button(type="submit")
+                | Asociar Paciente

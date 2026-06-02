@@ -1,0 +1,78 @@
+doctype html
+html
+    head
+        title Registro
+
+    body
+
+        h1 Registro de Usuario
+
+        form(action="/register" method="POST")
+
+            div
+                label Nombre Completo
+                br
+                input(
+                    type="text"
+                    name="nombre"
+                    required
+                )
+
+            br
+
+            div
+                label Usuario
+                br
+                input(
+                    type="text"
+                    name="usuario"
+                    required
+                )
+
+            br
+
+            div
+                label Email
+                br
+                input(
+                    type="email"
+                    name="email"
+                )
+
+            br
+
+            div
+                label Contraseña
+                br
+                input(
+                    type="password"
+                    name="password"
+                    required
+                )
+
+            br
+
+            div
+                label Rol
+                br
+
+                select(name="id_rol")
+
+                    option(value="4")
+                        | Admisión
+
+                    option(value="2")
+                        | Enfermería
+
+                    option(value="3")
+                        | Médico
+
+            br
+
+            button(type="submit")
+                | Registrarse
+
+        br
+
+        a(href="/")
+            | Volver al Login

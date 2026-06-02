@@ -1,0 +1,31 @@
+doctype html
+html
+    head
+        title Enfermería
+
+    body
+
+        h1 Pacientes Internados
+
+        table(border="1")
+
+            tr
+                th ID
+                th Paciente
+                th Fecha Ingreso
+                th Acción
+
+            each paciente in pacientes
+
+                tr
+                    td= paciente.id_admision
+
+                    td= paciente.apellido + ", " + paciente.nombre
+
+                    td= paciente.fecha_ingreso
+
+                    td
+                        a(
+                            href=`/enfermeria/evaluar/${paciente.id_admision}`
+                        )
+                            | Evaluar

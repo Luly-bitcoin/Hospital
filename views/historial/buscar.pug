@@ -1,0 +1,25 @@
+doctype html
+html
+    head
+        title Historial Clínico
+
+    body
+
+        h1 Historial Clínico
+
+        table(border="1")
+
+            tr
+                th DNI
+                th Paciente
+                th Acción
+
+            each paciente in pacientes
+
+                tr
+                    td= paciente.dni
+                    td= paciente.apellido + ", " + paciente.nombre
+
+                    td
+                        a(href=`/historial/${paciente.dni}`)
+                            | Ver Historial

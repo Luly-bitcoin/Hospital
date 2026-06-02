@@ -1,0 +1,47 @@
+doctype html
+html
+    head
+        title Emergencias
+
+    body
+
+        h1 Emergencias
+
+        a(href="/emergencias/nuevo")
+            | Nueva Emergencia
+
+        br
+        br
+
+        table(border="1")
+
+            tr
+                th Código
+                th Estado
+                th Cama
+                th Paciente
+                th Acción
+
+            each e in emergencias
+
+                tr
+
+                    td= e.codigo_temporal
+
+                    td= e.estado
+
+                    td= e.cama_codigo
+
+                    td
+                        if e.nombre
+                            = e.apellido + ", " + e.nombre
+                        else
+                            | SIN IDENTIFICAR
+
+                    td
+                        if e.estado == "sin_identificar"
+
+                            a(
+                                href=`/emergencias/identificar/${e.id_emergencia}`
+                            )
+                                | Identificar

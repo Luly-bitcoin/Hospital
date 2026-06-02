@@ -1,0 +1,45 @@
+doctype html
+html
+    head
+        title Evaluación Médica
+
+    body
+
+        h1 Evaluación Médica
+
+        h2= admision.apellido + ", " + admision.nombre
+
+        form(action="/medico/guardar" method="POST")
+
+            input(
+                type="hidden"
+                name="id_admision"
+                value=admision.id_admision
+            )
+
+            p Diagnóstico
+            textarea(name="diagnostico")
+
+            br
+            br
+
+            p Estudios
+            textarea(name="estudios")
+
+            br
+            br
+
+            p Tratamiento
+            textarea(name="tratamiento")
+
+            br
+            br
+
+            p Evolución
+            textarea(name="evolucion")
+
+            br
+            br
+
+            button(type="submit")
+                | Guardar Evaluación

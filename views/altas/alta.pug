@@ -1,0 +1,35 @@
+doctype html
+html
+    head
+        title Alta Hospitalaria
+
+    body
+
+        h1 Alta Hospitalaria
+
+        h2= admision.apellido + ", " + admision.nombre
+
+        form(
+            action="/altas/guardar"
+            method="POST"
+        )
+
+            input(
+                type="hidden"
+                name="id_admision"
+                value=admision.id_admision
+            )
+
+            p Indicaciones al Paciente
+
+            textarea(
+                name="indicaciones"
+                rows="8"
+                cols="60"
+            )
+
+            br
+            br
+
+            button(type="submit")
+                | Confirmar Alta

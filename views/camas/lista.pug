@@ -1,0 +1,139 @@
+doctype html
+html
+    head
+        title Gestión de Camas
+
+        style.
+
+            body{
+                font-family: Arial, sans-serif;
+                margin:20px;
+                background:#f5f5f5;
+            }
+
+            h1{
+                text-align:center;
+            }
+
+            .filtros{
+                margin-bottom:20px;
+                text-align:center;
+            }
+
+            .filtros button{
+                padding:10px 15px;
+                margin:5px;
+                cursor:pointer;
+                border:none;
+                border-radius:5px;
+                background:#007bff;
+                color:white;
+            }
+
+            .ala{
+                margin-top:30px;
+                background:white;
+                padding:15px;
+                border-radius:10px;
+                box-shadow:0 2px 5px rgba(0,0,0,0.1);
+            }
+
+            .habitacion{
+                margin-top:15px;
+                padding-left:20px;
+            }
+
+            .cama{
+                padding:12px;
+                margin:10px 0;
+                border-radius:8px;
+                border-left:8px solid #000;
+            }
+
+            .libre{
+                background:#d4edda;
+                border-left-color:#28a745;
+            }
+
+            .ocupada{
+                background:#f8d7da;
+                border-left-color:#dc3545;
+            }
+
+            .higienizando{
+                background:#fff3cd;
+                border-left-color:#ffc107;
+            }
+
+            .mantenimiento{
+                background:#d6d8db;
+                border-left-color:#6c757d;
+            }
+
+    body
+
+        h1 Gestión de Camas
+
+        .filtros
+            button(onclick="filtrar('todos')") Todas
+            button(onclick="filtrar('libre')") Libres
+            button(onclick="filtrar('ocupada')") Ocupadas
+            button(onclick="filtrar('higienizando')") Higienizando
+            button(onclick="filtrar('mantenimiento')") Mantenimiento
+
+        - let alaActual = ""
+        - let habitacionActual = ""
+
+        each cama in camas
+
+            if alaActual !== cama.ala
+                - alaActual = cama.ala
+                - habitacionActual = ""
+
+                .ala
+                    h2= cama.ala
+
+            if habitacionActual !== cama.habitacion
+                - habitacionActual = cama.habitacion
+
+                .habitacion
+                    h3 Habitación #{cama.habitacion}
+
+            .habitacion
+                .cama(class=cama.estado)
+
+                    p
+                        strong Código:
+                        |  #{cama.codigo}
+
+                    p
+                        strong Estado:
+                        |  #{cama.estado}
+
+                    if cama.paciente_nombre
+                        p
+                            strong Paciente:
+                            |  #{cama.paciente_apellido}, #{cama.paciente_nombre}
+
+        script.
+            function filtrar(estado){
+
+                const camas =
+                    document.querySelectorAll('.cama');
+
+                camas.forEach(cama => {
+
+                    if(estado === 'todos'){
+                        cama.style.display = 'block';
+                        return;
+                    }
+
+                    if(cama.classList.contains(estado)){
+                        cama.style.display = 'block';
+                    }else{
+                        cama.style.display = 'none';
+                    }
+
+                });
+
+            }

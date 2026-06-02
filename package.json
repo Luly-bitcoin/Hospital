@@ -2,6 +2,7 @@
   "name": "hospital",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -18,13 +19,17 @@
   },
   "homepage": "https://github.com/Luly-bitcoin/Hospital#readme",
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.3",
     "cookie-parser": "^1.4.7",
-    "dotenv": "^17.2.3",
-    "express": "^4.19.2",
-    "express-session": "^1.18.2",
+    "dotenv": "^17.4.2",
+    "express": "^4.22.2",
+    "express-session": "^1.19.0",
     "express-validator": "^7.3.1",
-    "mysql2": "^3.15.3",
-    "pug": "^3.0.3"
+    "mysql2": "^3.22.4",
+    "pug": "^3.0.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }

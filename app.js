@@ -1,19 +1,23 @@
 import express from "express";
-import path from "path";
 import session from "express-session";
-import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
+import path from "path";
 import { fileURLToPath } from "url";
-import router from "./routes/index.js";
-import db from "./config/db.js";
-import internacionesRouter from "./routes/internaciones.js";
-import enfermeriaRouter from "./routes/enfermeria.js";
-import camasRouter from "./routes/camas.js";
-import altaRouter from "./routes/alta.js";
-import medicoRouter from "./routes/medico.js";
-import pacientesRouter from "./routes/pacientes.js";
-import turnosRouter from "./routes/turnos.js";
-import bodyParser from "body-parser";
+
+import authRoutes from "./routes/authRoutes.js";
+import pacientesRoutes from "./routes/pacientesRoutes.js";
+import admisionesRoutes from "./routes/admisionesRoutes.js";
+import enfermeriaRoutes from "./routes/enfermeriaRoutes.js";
+import medicoRoutes from "./routes/medicoRoutes.js";
+import altasRoutes from "./routes/altasRoutes.js";
+import { mostrarDashboard } from "./controllers/dashboardController.js";
+import { verificarSesion } from "./middlewares/authMiddlewares.js";
+import medicosRoutes from "./routes/medicosRoutes.js";
+import turnosRoutes from "./routes/turnosRoutes.js";
+import historialRoutes from "./routes/historialRoutes.js";
+import reportesRoutes from "./routes/reportesRoutes.js";
+import camasRoutes from "./routes/camasRoutes.js";
+import emergenciasRoutes from "./routes/emergenciasRoutes.js";
 
 dotenv.config();
 
@@ -22,38 +26,43 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
+app.set("views", path.join(__dirname, "views"));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cookieParser());
-app.use(session({
-    secret: process.env.SESSION_SECRET || "supersecret",
-    resave: false,
-    saveUninitialized: false
-}));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", router);
-try {
-    const [rows] = await db.query("SELECT 1 + 1 AS result");
-    console.log("Conexión a la base de datos exitosa:", rows[0].result);
-}catch (error) {
-    console.error("Error de conexión a la base de datos:", error);
-}
-app.use("/internaciones", internacionesRouter);
-app.use("/enfermeria", enfermeriaRouter);
-app.use("/camas", camasRouter);
-app.use("/alta", altaRouter);
-app.use("/medico", medicoRouter);
-app.use("/pacientes", pacientesRouter);
-app.use("/turnos", turnosRouter);
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: false
+    })
+);
+
+app.use("/", authRoutes);
+app.use("/pacientes", pacientesRoutes);
+app.use("/admisiones", admisionesRoutes);
+app.use("/enfermeria", enfermeriaRoutes);
+app.use("/medico", medicoRoutes);
+app.use("/altas", altasRoutes);
+app.use("/medicos", medicosRoutes);
+app.use("/turnos", turnosRoutes);
+app.use("/historial", historialRoutes);
+app.use("/reportes", reportesRoutes);
+app.use("/camas", camasRoutes);
+app.use("/emergencias", emergenciasRoutes);
+
+app.get(
+    "/dashboard",
+    verificarSesion,
+    mostrarDashboard
+);
 
 const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, () => {
-    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+    console.log(`Servidor iniciado en puerto ${PORT}`);
 });

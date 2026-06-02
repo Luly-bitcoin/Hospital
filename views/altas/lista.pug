@@ -1,0 +1,30 @@
+doctype html
+html
+    head
+        title Altas
+
+    body
+
+        h1 Altas Hospitalarias
+
+        table(border="1")
+
+            tr
+                th Paciente
+                th Cama
+                th Acción
+
+            each paciente in pacientes
+
+                tr
+
+                    td= paciente.apellido + ", " + paciente.nombre
+
+                    td= paciente.codigo
+
+                    td
+
+                        a(
+                            href=`/altas/generar/${paciente.id_admision}`
+                        )
+                            | Dar Alta

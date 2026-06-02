@@ -1,0 +1,103 @@
+doctype html
+html
+    head
+        title Historia Clínica
+
+    body
+
+        h1 Historia Clínica
+
+        h2= paciente.apellido + ", " + paciente.nombre
+
+        p
+            b DNI:
+            | #{paciente.dni}
+
+        p
+            b Sexo:
+            | #{paciente.sexo}
+
+        p
+            b Edad:
+            | #{paciente.edad}
+
+        hr
+
+        each item in internaciones
+
+            h2 Internación ##{item.id_admision}
+
+            p
+                b Fecha ingreso:
+                | #{item.fecha_ingreso}
+
+            p
+                b Estado:
+                | #{item.estado}
+
+            p
+                b Motivo:
+                | #{item.motivo}
+
+            hr
+
+            h3 Evaluación Enfermería
+
+            p
+                b Antecedentes:
+                | #{item.antecedentes || "-"}
+
+            p
+                b Alergias:
+                | #{item.alergias || "-"}
+
+            p
+                b Medicamentos:
+                | #{item.medicamentos || "-"}
+
+            p
+                b Temperatura:
+                | #{item.signos_vitales_temp || "-"}
+
+            p
+                b Frecuencia Cardíaca:
+                | #{item.signos_vitales_fc || "-"}
+
+            p
+                b Presión Arterial:
+                | #{item.signos_vitales_pa || "-"}
+
+            hr
+
+            h3 Evaluación Médica
+
+            p
+                b Diagnóstico:
+                | #{item.diagnostico || "-"}
+
+            p
+                b Estudios:
+                | #{item.estudios || "-"}
+
+            p
+                b Tratamiento:
+                | #{item.tratamiento || "-"}
+
+            p
+                b Evolución:
+                | #{item.evolucion || "-"}
+
+            hr
+
+            h3 Alta Hospitalaria
+
+            p
+                b Fecha Alta:
+                | #{item.fecha_alta || "Sin alta"}
+
+            p
+                b Indicaciones:
+                | #{item.indicaciones || "-"}
+
+            hr
+            hr

@@ -1,0 +1,30 @@
+doctype html
+html
+    head
+        title Turnos
+
+    body
+
+        h1 Turnos
+
+        a(href="/turnos/nuevo")
+            | Nuevo Turno
+
+        br
+        br
+
+        table(border="1")
+
+            tr
+                th Paciente
+                th Médico
+                th Fecha
+                th Estado
+
+            each turno in turnos
+
+                tr
+                    td= turno.paciente_apellido + ", " + turno.paciente_nombre
+                    td= turno.medico_apellido + ", " + turno.medico_nombre
+                    td= turno.fecha_solicitada
+                    td= turno.estado
