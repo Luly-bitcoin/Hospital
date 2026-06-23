@@ -3,25 +3,41 @@ html
     head
         title Médico
 
-    body
+        link(
+            rel="stylesheet"
+            href="/css/medico.css"
+        )
 
-        h1 Pacientes Internados
+    body.lista-medico
 
-        table(border="1")
+        .contenedor
 
-            tr
-                th ID
-                th Paciente
-                th Fecha
-                th Acción
+            h1 Pacientes Internados
 
-            each paciente in pacientes
+            .tabla-card
 
-                tr
-                    td= paciente.id_admision
-                    td= paciente.apellido + ", " + paciente.nombre
-                    td= paciente.fecha_ingreso
+                table
 
-                    td
-                        a(href=`/medico/evaluar/${paciente.id_admision}`)
-                            | Evaluar
+                    thead
+                        tr
+                            th ID
+                            th Paciente
+                            th Fecha Ingreso
+                            th Acción
+
+                    tbody
+
+                        each paciente in pacientes
+
+                            tr
+                                td= paciente.id_admision
+
+                                td= paciente.apellido + ", " + paciente.nombre
+
+                                td= paciente.fecha_formateada
+
+                                td
+                                    a.btn-accion(
+                                        href=`/medico/evaluar/${paciente.id_admision}`
+                                    )
+                                        | Evaluar

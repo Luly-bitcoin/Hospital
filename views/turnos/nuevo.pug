@@ -3,43 +3,58 @@ html
     head
         title Nuevo Turno
 
-    body
+        link(
+            rel="stylesheet"
+            href="/css/turnos.css"
+        )
 
-        h1 Nuevo Turno
+    body.nuevo-turno
 
-        form(action="/turnos/guardar" method="POST")
+        .form-card
 
-            p Paciente
+            h1 Nuevo Turno
 
-            select(name="dni_paciente")
-
-                each paciente in pacientes
-
-                    option(value=paciente.dni)
-                        = paciente.apellido + ", " + paciente.nombre
-
-            p Médico
-
-            select(name="id_medico")
-
-                each medico in medicos
-
-                    option(value=medico.id_medico)
-                        = medico.apellido + ", " + medico.nombre
-
-            p Fecha y Hora
-
-            input(
-                type="datetime-local"
-                name="fecha_solicitada"
+            form(
+                action="/turnos/guardar"
+                method="POST"
             )
 
-            p Motivo
+                .grupo
 
-            textarea(name="motivo")
+                    label Paciente
 
-            br
-            br
+                    select(name="dni_paciente")
 
-            button(type="submit")
-                | Guardar Turno
+                        each paciente in pacientes
+
+                            option(value=paciente.dni)
+                                = paciente.apellido + ", " + paciente.nombre
+
+                .grupo
+
+                    label Médico
+
+                    select(name="id_medico")
+
+                        each medico in medicos
+
+                            option(value=medico.id_medico)
+                                = medico.apellido + ", " + medico.nombre
+
+                .grupo
+
+                    label Fecha y Hora
+
+                    input(
+                        type="datetime-local"
+                        name="fecha_solicitada"
+                    )
+
+                .grupo
+
+                    label Motivo
+
+                    textarea(name="motivo")
+
+                button.btn-guardar(type="submit")
+                    | Guardar Turno

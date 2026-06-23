@@ -16,6 +16,20 @@ export const listarAdmisiones = async (req, res) => {
         ORDER BY a.id_admision DESC
     `);
 
+    admisiones.forEach(admision => {
+
+        admision.fecha_formateada =
+            new Date(admision.fecha_ingreso)
+            .toLocaleString('es-AR', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+    });
+
     res.render("admisiones/lista", {
         admisiones
     });

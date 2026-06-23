@@ -1,38 +1,63 @@
 doctype html
-html
+html(lang="es")
     head
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+
         title Admisiones
+
+        link(rel="stylesheet" href="/css/admisiones.css")
 
     body
 
-        h1 Admisiones
+        .contenedor
 
-        a(href="/dashboard")
-            | Dashboard
+            aside.menu-lateral
 
-        br
-        br
+                h2 Admisiones
 
-        a(href="/admisiones/nueva")
-            | Nueva Admisión
+                a.btn-menu(href="/dashboard")
+                    | Inicio
 
-        br
-        br
+                a.btn-menu.btn-nueva(href="/admisiones/nueva")
+                    | + Nueva Admisión
 
-        table(border="1")
+            main.contenido
 
-            tr
-                th ID
-                th Paciente
-                th Fecha
-                th Estado
-                th Cama
+                h1 Gestión de Admisiones
 
-            each admision in admisiones
+                .tabla-container
 
-                tr
-                    td= admision.id_admision
-                    td= admision.nombre + " " + admision.apellido
-                    td= admision.fecha_ingreso
-                    td= admision.estado
-                    td= admision.codigo
+                    table
+
+                        thead
+
+                            tr
+                                th ID
+                                th Paciente
+                                th Fecha Ingreso
+                                th Estado
+                                th Cama
+
+                        tbody
+
+                            each admision in admisiones
+
+                                tr
+
+                                    td= admision.id_admision
+
+                                    td
+                                        strong= admision.apellido
+                                        | , #{admision.nombre}
+
+                                    td= admision.fecha_formateada
+
+                                    td
+
+                                        span(
+                                            class=`estado ${admision.estado}`
+                                        )
+                                            = admision.estado
+
+                                    td= admision.codigo

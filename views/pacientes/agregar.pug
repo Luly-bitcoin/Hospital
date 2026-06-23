@@ -1,76 +1,79 @@
 doctype html
-html
+html(lang="es")
     head
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title Nuevo Paciente
+
+        link(rel="stylesheet" href="/css/pacientes.css")
 
     body
 
-        h1 Nuevo Paciente
+        .contenedor
 
-        form(action="/pacientes/nuevo" method="POST")
+            .card
 
-            input(
-                type="number"
-                name="dni"
-                placeholder="DNI"
-                required
-            )
+                h1 Nuevo Paciente
 
-            br
-            br
+                form(action="/pacientes/nuevo" method="POST")
 
-            input(
-                type="text"
-                name="nombre"
-                placeholder="Nombre"
-                required
-            )
+                    .grupo
+                        label DNI
+                        input(
+                            type="number"
+                            name="dni"
+                            required
+                        )
 
-            br
-            br
+                    .grupo
+                        label Nombre
+                        input(
+                            type="text"
+                            name="nombre"
+                            required
+                        )
 
-            input(
-                type="text"
-                name="apellido"
-                placeholder="Apellido"
-                required
-            )
+                    .grupo
+                        label Apellido
+                        input(
+                            type="text"
+                            name="apellido"
+                            required
+                        )
 
-            br
-            br
+                    .grupo
+                        label Sexo
 
-            select(name="sexo")
-                option(value="M") Masculino
-                option(value="F") Femenino
+                        select(name="sexo")
+                            option(value="M") Masculino
+                            option(value="F") Femenino
 
-            br
-            br
+                    .grupo
+                        label Fecha de nacimiento
 
-            input(
-                type="date"
-                name="fecha_nacimiento"
-            )
+                        input(
+                            type="date"
+                            name="fecha_nacimiento"
+                        )
 
-            br
-            br
+                    .grupo
+                        label Teléfono
 
-            input(
-                type="text"
-                name="telefono"
-                placeholder="Telefono"
-            )
+                        input(
+                            type="text"
+                            name="telefono"
+                        )
 
-            br
-            br
+                    .grupo
+                        label Localidad
 
-            input(
-                type="text"
-                name="localidad"
-                placeholder="Localidad"
-            )
+                        input(
+                            type="text"
+                            name="localidad"
+                        )
 
-            br
-            br
+                    button.btn-guardar(type="submit")
+                        | Guardar Paciente
 
-            button(type="submit")
-                | Guardar
+                    a.btn-volver(href="/pacientes")
+                        | Cancelar

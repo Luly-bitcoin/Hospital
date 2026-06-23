@@ -1,71 +1,74 @@
 doctype html
-html
+html(lang="es")
     head
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title HIS Dashboard
+
+        link(rel="stylesheet" href="/css/dashboard.css")
 
     body
 
-        h1 Sistema Hospitalario HIS
+        header.header
 
-        h2 Estadísticas Generales
+            .logo
+                img(src="/img/logo.png")
 
-        hr
+            .header-center
+                .titulo
+                    h1 Hospital Information System
 
-        h3 Pacientes Internados
-        p= internados
+                nav.menu
+                    a(href="/pacientes") Pacientes
+                    a(href="/camas") Camas
+                    a(href="/admisiones") Admisiones
+                    a(href="/enfermeria") Enfermería
+                    a(href="/medico") Médico
+                    a(href="/turnos") Turnos
+                    a(href="/reportes") Reportes
 
-        h3 Camas Libres
-        p= libres
+            .usuario
+                a(href="/perfil")
+                    img(src="/img/user.png")
+                span= usuario
 
-        h3 Camas Ocupadas
-        p= ocupadas
+        main.dashboard
 
-        h3 Camas Higienizando
-        p= higienizando
+            .estadisticas
 
-        h3 Altas del Día
-        p= altasHoy
+                .card
+                    h3 Internados
+                    p= internados
 
-        hr
+                .card
+                    h3 Camas Libres
+                    p= libres
 
-        a(href="/pacientes") Pacientes
+                .card
+                    h3 Camas Ocupadas
+                    p= ocupadas
 
-        br
+                .card
+                    h3 Higienizando
+                    p= higienizando
 
-        a(href="/camas") Camas
+                .card
+                    h3 Altas Hoy
+                    p= altasHoy
 
-        br
+            .hero
 
-        a(href="/admisiones") Admisiones
+                .imagen
+                    img(src="/img/hospital1.jpg")
 
-        br
+                .imagen.centro
+                    img(src="/img/hospital2.jpg")
 
-        a(href="/enfermeria") Enfermería
+                    a.btn-emergencia(href="/emergencias")
+                        | EMERGENCIA
 
-        br
+                .imagen
+                    img(src="/img/hospital3.jpg")
 
-        a(href="/medico") Médico
-
-        br
-
-        a(href="/altas") Altas
-
-        br
-
-        a(href="/medicos") Doctores
-        
-        br
-
-        a(href="/turnos") Turnos
-
-        br
-
-        a(href="/historial") Historial Clínico
-
-        br
-
-        a(href="/reportes") Reportes Hospitalarios 
-
-        br
-
-        a(href="/logout") Cerrar sesión
+        footer.footer
+            p © 2026 HIS Hospital - Todos los derechos reservados

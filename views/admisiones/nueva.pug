@@ -1,52 +1,72 @@
 doctype html
-html
+html(lang="es")
     head
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+
         title Nueva Admisión
+
+        link(rel="stylesheet" href="/css/admisiones.css")
 
     body
 
-        h1 Nueva Admisión
+        .contenedor
 
-        form(action="/admisiones/nueva" method="POST")
+            aside.menu-lateral
 
-            label Paciente
+                h2 Admisiones
 
-            br
+                a.btn-menu(href="/admisiones")
+                    | ← Volver
 
-            select(name="dni_paciente")
+            main.contenido
 
-                each paciente in pacientes
+                .form-card
 
-                    option(value=paciente.dni)
-                        = paciente.apellido + ", " + paciente.nombre
+                    h1 Nueva Admisión
 
-            br
-            br
+                    form(
+                        action="/admisiones/nueva"
+                        method="POST"
+                    )
 
-            label Motivo
+                        .campo
 
-            br
+                            label Paciente
 
-            textarea(
-                name="motivo"
-            )
+                            select(name="dni_paciente" required)
 
-            br
-            br
+                                option(value="")
+                                    | Seleccionar paciente
 
-            label Cama
+                                each paciente in pacientes
 
-            br
+                                    option(value=paciente.dni)
+                                        = paciente.apellido + ", " + paciente.nombre
 
-            select(name="id_cama")
+                        .campo
 
-                each cama in camas
+                            label Motivo de ingreso
 
-                    option(value=cama.id_cama)
-                        = cama.codigo
+                            textarea(
+                                name="motivo"
+                                rows="4"
+                                required
+                            )
 
-            br
-            br
+                        .campo
 
-            button(type="submit")
-                | Guardar
+                            label Cama disponible
+
+                            select(name="id_cama" required)
+
+                                option(value="")
+                                    | Seleccionar cama
+
+                                each cama in camas
+
+                                    option(value=cama.id_cama)
+                                        = cama.codigo
+
+                        button.btn-guardar(type="submit")
+                            | Guardar Admisión

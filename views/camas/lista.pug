@@ -1,139 +1,83 @@
 doctype html
-html
+html(lang="es")
     head
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+
         title Gestión de Camas
 
-        style.
-
-            body{
-                font-family: Arial, sans-serif;
-                margin:20px;
-                background:#f5f5f5;
-            }
-
-            h1{
-                text-align:center;
-            }
-
-            .filtros{
-                margin-bottom:20px;
-                text-align:center;
-            }
-
-            .filtros button{
-                padding:10px 15px;
-                margin:5px;
-                cursor:pointer;
-                border:none;
-                border-radius:5px;
-                background:#007bff;
-                color:white;
-            }
-
-            .ala{
-                margin-top:30px;
-                background:white;
-                padding:15px;
-                border-radius:10px;
-                box-shadow:0 2px 5px rgba(0,0,0,0.1);
-            }
-
-            .habitacion{
-                margin-top:15px;
-                padding-left:20px;
-            }
-
-            .cama{
-                padding:12px;
-                margin:10px 0;
-                border-radius:8px;
-                border-left:8px solid #000;
-            }
-
-            .libre{
-                background:#d4edda;
-                border-left-color:#28a745;
-            }
-
-            .ocupada{
-                background:#f8d7da;
-                border-left-color:#dc3545;
-            }
-
-            .higienizando{
-                background:#fff3cd;
-                border-left-color:#ffc107;
-            }
-
-            .mantenimiento{
-                background:#d6d8db;
-                border-left-color:#6c757d;
-            }
+        link(rel="stylesheet" href="/css/camas.css")
 
     body
 
-        h1 Gestión de Camas
+        .contenedor
 
-        .filtros
-            button(onclick="filtrar('todos')") Todas
-            button(onclick="filtrar('libre')") Libres
-            button(onclick="filtrar('ocupada')") Ocupadas
-            button(onclick="filtrar('higienizando')") Higienizando
-            button(onclick="filtrar('mantenimiento')") Mantenimiento
+            aside.menu-lateral
 
-        - let alaActual = ""
-        - let habitacionActual = ""
+                h2 Menú
 
-        each cama in camas
+                button(onclick="filtrar('todos')")
+                    | Todas
 
-            if alaActual !== cama.ala
-                - alaActual = cama.ala
-                - habitacionActual = ""
+                button(onclick="filtrar('libre')")
+                    | Libres
 
-                .ala
-                    h2= cama.ala
+                button(onclick="filtrar('ocupada')")
+                    | Ocupadas
 
-            if habitacionActual !== cama.habitacion
-                - habitacionActual = cama.habitacion
+                button(onclick="filtrar('higienizando')")
+                    | Higienizando
 
-                .habitacion
-                    h3 Habitación #{cama.habitacion}
+                hr
 
-            .habitacion
-                .cama(class=cama.estado)
+                button.btn-agregar(
+                    onclick=`crearAla()`
+                )
+                    | + Ala
 
-                    p
-                        strong Código:
-                        |  #{cama.codigo}
+            main.contenido
 
-                    p
-                        strong Estado:
-                        |  #{cama.estado}
+                h1 Gestión de Camas
 
-                    if cama.paciente_nombre
-                        p
-                            strong Paciente:
-                            |  #{cama.paciente_apellido}, #{cama.paciente_nombre}
+                .alas-container
 
-        script.
-            function filtrar(estado){
+                    each ala in alas
 
-                const camas =
-                    document.querySelectorAll('.cama');
+                        .ala-card
 
-                camas.forEach(cama => {
+                            .ala-header
+                                h2= ala.nombre
 
-                    if(estado === 'todos'){
-                        cama.style.display = 'block';
-                        return;
-                    }
+                            .ala-body
 
-                    if(cama.classList.contains(estado)){
-                        cama.style.display = 'block';
-                    }else{
-                        cama.style.display = 'none';
-                    }
+                                each habitacion in ala.habitaciones
 
-                });
+                                    .habitacion-card
 
-            }
+                                        h3 Habitación #{habitacion.numero}
+
+                                        .camas-container
+
+                                            each cama in habitacion.camas
+
+                                                .cama(
+                                                    class=cama.estado
+                                                )
+
+                                                    span= cama.codigo
+
+                                        if habitacion.camas.length < 2
+
+                                            button.btn-agregar-cama(
+                                                onclick=`crearCama(${habitacion.id_habitacion})`
+                                            )
+                                                | + Cama
+
+                                if ala.habitaciones.length < 4
+
+                                    button.btn-agregar-habitacion(
+                                        onclick=`crearHabitacion(${ala.id_ala})`
+                                    )
+                                        | + Habitación
+
+        script(src="/js/camas.js")

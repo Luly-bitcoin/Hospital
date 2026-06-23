@@ -3,28 +3,46 @@ html
     head
         title Turnos
 
-    body
+        link(
+            rel="stylesheet"
+            href="/css/turnos.css"
+        )
 
-        h1 Turnos
+    body.lista-turnos
 
-        a(href="/turnos/nuevo")
-            | Nuevo Turno
+        .contenedor
 
-        br
-        br
+            h1 Gestión de Turnos
 
-        table(border="1")
+            .acciones
 
-            tr
-                th Paciente
-                th Médico
-                th Fecha
-                th Estado
+                a.btn-nuevo(
+                    href="/turnos/nuevo"
+                )
+                    | + Nuevo Turno
 
-            each turno in turnos
+            .tabla-card
 
-                tr
-                    td= turno.paciente_apellido + ", " + turno.paciente_nombre
-                    td= turno.medico_apellido + ", " + turno.medico_nombre
-                    td= turno.fecha_solicitada
-                    td= turno.estado
+                table
+
+                    thead
+                        tr
+                            th Paciente
+                            th Médico
+                            th Fecha
+                            th Estado
+
+                    tbody
+
+                        each turno in turnos
+
+                            tr
+                                td= turno.paciente_apellido + ", " + turno.paciente_nombre
+
+                                td= turno.medico_apellido + ", " + turno.medico_nombre
+
+                                td= turno.fecha_formateada
+
+                                td
+                                    span.estado
+                                        = turno.estado

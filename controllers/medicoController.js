@@ -14,6 +14,20 @@ export const listarPacientes = async (req, res) => {
         WHERE a.estado='activa'
     `);
 
+        pacientes.forEach(paciente => {
+
+        const fecha = new Date(paciente.fecha_ingreso);
+
+        paciente.fecha_formateada =
+            fecha.toLocaleDateString('es-AR') +
+            " - " +
+            fecha.toLocaleTimeString('es-AR', {
+                hour: '2-digit',
+                minute: '2-digit'
+            }) +
+            " hs";
+    });
+
     res.render("medico/lista", {
         pacientes
     });

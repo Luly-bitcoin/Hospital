@@ -3,43 +3,51 @@ html
     head
         title Evaluación Médica
 
-    body
+        link(
+            rel="stylesheet"
+            href="/css/medico.css"
+        )
 
-        h1 Evaluación Médica
+    body.evaluacion-medica
 
-        h2= admision.apellido + ", " + admision.nombre
+        .form-card
 
-        form(action="/medico/guardar" method="POST")
+            h1 Evaluación Médica
 
-            input(
-                type="hidden"
-                name="id_admision"
-                value=admision.id_admision
+            .paciente-info
+
+                h2= admision.apellido + ", " + admision.nombre
+
+                p
+                    b Admisión:
+                    = " " + admision.id_admision
+
+            form(
+                action="/medico/guardar"
+                method="POST"
             )
 
-            p Diagnóstico
-            textarea(name="diagnostico")
+                input(
+                    type="hidden"
+                    name="id_admision"
+                    value=admision.id_admision
+                )
 
-            br
-            br
+                .grupo
+                    label Diagnóstico
+                    textarea(name="diagnostico")
 
-            p Estudios
-            textarea(name="estudios")
+                .grupo
+                    label Estudios Solicitados
+                    textarea(name="estudios")
 
-            br
-            br
+                .grupo
+                    label Tratamiento
+                    textarea(name="tratamiento")
 
-            p Tratamiento
-            textarea(name="tratamiento")
+                .grupo
+                    label Evolución
+                    textarea(name="evolucion")
 
-            br
-            br
-
-            p Evolución
-            textarea(name="evolucion")
-
-            br
-            br
-
-            button(type="submit")
-                | Guardar Evaluación
+                button.btn-guardar(type="submit")
+                    | Guardar Evaluación

@@ -3,100 +3,85 @@ html
     head
         title Evaluación Enfermería
 
-    body
-
-        h1 Evaluación Inicial
-
-        h2= admision.apellido + ", " + admision.nombre
-
-        form(
-            action="/enfermeria/guardar"
-            method="POST"
+        link(
+            rel="stylesheet"
+            href="/css/evaluaciones.css"
         )
 
-            input(
-                type="hidden"
-                name="id_admision"
-                value=admision.id_admision
+    body.evaluacion
+
+        .form-card
+
+            h1 Evaluación Inicial
+
+            .paciente-info
+
+                h2= admision.apellido + ", " + admision.nombre
+
+                p
+                    b Admisión:
+                    = " " + admision.id_admision
+
+            form(
+                action="/enfermeria/guardar"
+                method="POST"
             )
 
-            h3 Antecedentes
+                input(
+                    type="hidden"
+                    name="id_admision"
+                    value=admision.id_admision
+                )
 
-            textarea(
-                name="antecedentes"
-            )
+                .grupo
+                    label Antecedentes
+                    textarea(name="antecedentes")
 
-            br
-            br
+                .grupo
+                    label Alergias
+                    textarea(name="alergias")
 
-            h3 Alergias
+                .grupo
+                    label Medicamentos
+                    textarea(name="medicamentos")
 
-            textarea(
-                name="alergias"
-            )
+                .grupo
+                    label Motivo Internación
+                    textarea(name="motivo_internacion")
 
-            br
-            br
+                .fila
 
-            h3 Medicamentos
+                    .grupo
+                        label Temperatura
+                        input(
+                            type="number"
+                            step="0.1"
+                            name="temperatura"
+                        )
 
-            textarea(
-                name="medicamentos"
-            )
+                    .grupo
+                        label Frecuencia Cardíaca
+                        input(
+                            type="number"
+                            name="frecuencia_cardiaca"
+                        )
 
-            br
-            br
+                .fila
 
-            h3 Motivo Internación
+                    .grupo
+                        label Frecuencia Respiratoria
+                        input(
+                            type="number"
+                            name="frecuencia_respiratoria"
+                        )
 
-            textarea(
-                name="motivo_internacion"
-            )
+                    .grupo
+                        label Presión Arterial
+                        input(
+                            type="text"
+                            name="presion"
+                            placeholder="120/80"
+                        )
 
-            br
-            br
-
-            h3 Temperatura
-
-            input(
-                type="number"
-                step="0.1"
-                name="temperatura"
-            )
-
-            br
-            br
-
-            h3 Frecuencia Cardíaca
-
-            input(
-                type="number"
-                name="frecuencia_cardiaca"
-            )
-
-            br
-            br
-
-            h3 Frecuencia Respiratoria
-
-            input(
-                type="number"
-                name="frecuencia_respiratoria"
-            )
-
-            br
-            br
-
-            h3 Presión Arterial
-
-            input(
-                type="text"
-                name="presion"
-                placeholder="120/80"
-            )
-
-            br
-            br
-
-            button(type="submit")
-                | Guardar Evaluación
+                button.btn-guardar(type="submit")
+                    | Guardar Evaluación

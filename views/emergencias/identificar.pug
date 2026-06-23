@@ -1,31 +1,33 @@
-doctype html
-html
-    head
-        title Identificar Paciente
+head
+    title Identificar Paciente
 
-    body
+    link(
+        rel="stylesheet"
+        href="/css/emergencias.css"
+    )
+
+body.form-emergencia
+
+    .form-card
 
         h1 Identificar Paciente
 
-        h3= emergencia.codigo_temporal
+        .codigo-temporal
 
-        form(
-            method="POST"
-        )
+            = emergencia.codigo_temporal
 
-            select(
-                name="dni_paciente"
-            )
+        form(method="POST")
 
-                each paciente in pacientes
+            .grupo
 
-                    option(
-                        value=paciente.dni
-                    )
-                        = paciente.apellido + ", " + paciente.nombre
+                label Paciente
 
-            br
-            br
+                select(name="dni_paciente")
 
-            button(type="submit")
+                    each paciente in pacientes
+
+                        option(value=paciente.dni)
+                            = paciente.apellido + ", " + paciente.nombre
+
+            button.btn-guardar(type="submit")
                 | Asociar Paciente

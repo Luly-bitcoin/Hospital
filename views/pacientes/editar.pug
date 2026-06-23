@@ -1,0 +1,96 @@
+doctype html
+html(lang="es")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title Editar Paciente
+
+        link(rel="stylesheet" href="/css/pacientes.css")
+
+    body
+
+        .contenedor
+
+            .card
+
+                h1 Editar Paciente
+
+                form(action=`/pacientes/editar/${paciente.dni}` method="POST")
+
+                    .grupo
+                        label DNI
+
+                        input(
+                            type="number"
+                            name="dni"
+                            value=paciente.dni
+                            readonly
+                        )
+
+                    .grupo
+                        label Nombre
+
+                        input(
+                            type="text"
+                            name="nombre"
+                            value=paciente.nombre
+                            required
+                        )
+
+                    .grupo
+                        label Apellido
+
+                        input(
+                            type="text"
+                            name="apellido"
+                            value=paciente.apellido
+                            required
+                        )
+
+                    .grupo
+                        label Sexo
+
+                        select(name="sexo")
+
+                            option(
+                                value="M"
+                                selected=paciente.sexo==="M"
+                            ) Masculino
+
+                            option(
+                                value="F"
+                                selected=paciente.sexo==="F"
+                            ) Femenino
+
+                    .grupo
+                        label Fecha de nacimiento
+
+                        input(
+                            type="date"
+                            name="fecha_nacimiento"
+                            value=paciente.fecha_nacimiento
+                        )
+
+                    .grupo
+                        label Teléfono
+
+                        input(
+                            type="text"
+                            name="telefono"
+                            value=paciente.telefono
+                        )
+
+                    .grupo
+                        label Localidad
+
+                        input(
+                            type="text"
+                            name="localidad"
+                            value=paciente.localidad
+                        )
+
+                    button.btn-guardar(type="submit")
+                        | Guardar Cambios
+
+                    a.btn-volver(href="/pacientes")
+                        | Volver

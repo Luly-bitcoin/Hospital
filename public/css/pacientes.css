@@ -1,0 +1,136 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:#f5f9fc;
+    padding:30px;
+}
+
+.contenedor{
+    max-width:1200px;
+    margin:auto;
+}
+
+.encabezado{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+h1{
+    color:#1565c0;
+}
+
+.btn-nuevo,
+.btn-editar,
+.btn-volver,
+.btn-guardar{
+
+    text-decoration:none;
+
+    border:none;
+
+    cursor:pointer;
+
+    padding:10px 18px;
+
+    border-radius:10px;
+
+    font-weight:bold;
+}
+
+.btn-nuevo{
+    background:#2196f3;
+    color:white;
+}
+
+.btn-editar{
+    background:#43a047;
+    color:white;
+}
+
+.btn-volver{
+    background:#9e9e9e;
+    color:white;
+    display:inline-block;
+    margin-top:10px;
+}
+
+.btn-guardar{
+    background:#2196f3;
+    color:white;
+    width:100%;
+    margin-top:20px;
+}
+
+.card{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 4px 15px rgba(0,0,0,.1);
+}
+
+.grupo{
+    margin-bottom:15px;
+}
+
+.grupo label{
+    display:block;
+    margin-bottom:5px;
+    font-weight:600;
+    color:#1565c0;
+}
+
+.grupo input,
+.grupo select{
+
+    width:100%;
+
+    padding:12px;
+
+    border:1px solid #ccc;
+
+    border-radius:10px;
+}
+
+.busqueda{
+    margin-bottom:20px;
+}
+
+.busqueda input{
+
+    width:100%;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    border:1px solid #ccc;
+}
+
+.tabla{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    box-shadow:0 4px 15px rgba(0,0,0,.1);
+}
+
+.tabla th{
+    background:#2196f3;
+    color:white;
+    padding:15px;
+}
+
+.tabla td{
+    padding:12px;
+    border-bottom:1px solid #eee;
+}
+
+.tabla tr:hover{
+    background:#f1f8ff;
+}

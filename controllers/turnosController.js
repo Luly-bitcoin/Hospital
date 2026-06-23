@@ -17,6 +17,20 @@ export const listarTurnos = async (req, res) => {
         ORDER BY t.fecha_solicitada
     `);
 
+    turnos.forEach(turno => {
+
+        const fecha = new Date(turno.fecha_solicitada);
+
+        turno.fecha_formateada =
+            fecha.toLocaleDateString('es-AR') +
+            " - " +
+            fecha.toLocaleTimeString('es-AR', {
+                hour: '2-digit',
+                minute: '2-digit'
+            }) +
+            " hs";
+    });
+
     res.render("turnos/lista", {
         turnos
     });

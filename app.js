@@ -18,6 +18,8 @@ import historialRoutes from "./routes/historialRoutes.js";
 import reportesRoutes from "./routes/reportesRoutes.js";
 import camasRoutes from "./routes/camasRoutes.js";
 import emergenciasRoutes from "./routes/emergenciasRoutes.js";
+import perfilRoutes from "./routes/perfilRoutes.js";
+import registerRoutes from "./routes/registerRoutes.js";
 
 dotenv.config();
 
@@ -54,6 +56,8 @@ app.use("/historial", historialRoutes);
 app.use("/reportes", reportesRoutes);
 app.use("/camas", camasRoutes);
 app.use("/emergencias", emergenciasRoutes);
+app.use("/perfil", perfilRoutes);
+app.use("/registro", registerRoutes);
 
 app.get(
     "/dashboard",

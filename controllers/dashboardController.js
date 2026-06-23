@@ -37,6 +37,8 @@ export const mostrarDashboard = async (req, res) => {
         libres: libres.total,
         ocupadas: ocupadas.total,
         higienizando: higienizando.total,
-        altasHoy: altasHoy.total
+        altasHoy: altasHoy.total,
+
+        usuario: req.session.usuario.usuario
     });
 };

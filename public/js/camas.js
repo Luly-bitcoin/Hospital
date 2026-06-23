@@ -1,44 +1,89 @@
-import { Router } from "express";
-import db from "../config/db.js";
+function filtrar(estado){
 
-const router = Router();
+    const camas = document.querySelectorAll('.cama');
 
-// MOSTRAR TODAS LAS CAMAS CON HABITACIONES Y ALAS
-router.get("/", async (req, res) => {
+    camas.forEach(cama => {
 
-    // 1️⃣ OBTENER ALAS
-    const [alas] = await db.query(`
-        SELECT * FROM alas ORDER BY nombre
-    `);
+        if(estado === 'todos'){
+            cama.style.display = 'flex';
+            return;
+        }
 
-    // 2️⃣ OBTENER HABITACIONES CON EL NOMBRE DEL ALA
-    const [habitaciones] = await db.query(`
-        SELECT h.*, a.nombre AS ala_nombre
-        FROM habitaciones h
-        JOIN alas a ON a.id_ala = h.id_ala
-        ORDER BY a.nombre, h.numero
-    `);
+        if(cama.classList.contains(estado)){
+            cama.style.display = 'flex';
+        }else{
+            cama.style.display = 'none';
+        }
 
-    // 3️⃣ OBTENER CAMAS + ESTADO + PACIENTE SI ESTÁ OCUPADA
-    const [camas] = await db.query(`
-        SELECT 
-            c.*, 
-            h.numero AS habitacion_num,
-            a.nombre AS ala_nombre,
-            p.sexo AS sexo_paciente
-        FROM camas c
-        JOIN habitaciones h ON h.id_habitacion = c.id_habitacion
-        JOIN alas a ON a.id_ala = h.id_ala
-        LEFT JOIN internaciones ad ON ad.id_cama = c.id_cama AND ad.estado = 'activa'
-        LEFT JOIN pacientes p ON p.dni = ad.dni_paciente
-        ORDER BY a.nombre, h.numero, c.codigo
-    `);
-
-    res.render("camas/vista-camas", {
-        alas,
-        habitaciones,
-        camas
     });
-});
+}
 
-export default router;
+function seleccionarCama(cama){
+
+    document
+        .querySelectorAll('.cama')
+        .forEach(c => c.classList.remove('seleccionada'));
+
+    cama.classList.add('seleccionada');
+}
+
+async function crearCama(idHabitacion){
+
+    const res = await fetch("/camas/cama",{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+            id_habitacion:idHabitacion
+        })
+    });
+
+    if(res.ok){
+        location.reload();
+    }
+}
+
+async function crearHabitacion(idAla){
+
+    const res = await fetch("/camas/habitacion",{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+            id_ala:idAla
+        })
+    });
+
+    if(res.ok){
+        location.reload();
+    }
+}
+
+async function crearAla(){
+
+    const esUrgencias = confirm(
+        "Aceptar = Ala Normal\nCancelar = Ala de Urgencias"
+    );
+
+    const tipo = esUrgencias
+        ? "normal"
+        : "urgencias";
+
+    const res = await fetch("/camas/ala",{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+            tipo
+        })
+    });
+
+    if(res.ok){
+        location.reload();
+    }else{
+        alert("Error al crear ala");
+    }
+}

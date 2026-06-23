@@ -5,7 +5,11 @@
     font-family:'Segoe UI',sans-serif;
 }
 
-body.lista-turnos{
+/* ==========================
+   LISTA DE PACIENTES
+========================== */
+
+body.lista-medico{
 
     min-height:100vh;
 
@@ -27,34 +31,7 @@ body.lista-turnos{
 h1{
     text-align:center;
     color:#1565c0;
-    margin-bottom:25px;
-}
-
-.acciones{
-    margin-bottom:20px;
-}
-
-.btn-nuevo{
-
-    display:inline-block;
-
-    padding:12px 25px;
-
-    background:#2196f3;
-
-    color:white;
-
-    text-decoration:none;
-
-    border-radius:25px;
-
-    font-weight:bold;
-
-    transition:.3s;
-}
-
-.btn-nuevo:hover{
-    background:#1976d2;
+    margin-bottom:30px;
 }
 
 .tabla-card{
@@ -99,20 +76,34 @@ tr:hover{
     background:#f5f9ff;
 }
 
-.estado{
+.btn-accion{
 
-    padding:8px 15px;
+    display:inline-block;
 
-    border-radius:15px;
+    padding:10px 20px;
 
-    background:#e3f2fd;
+    border-radius:20px;
 
-    color:#1565c0;
+    background:#2196f3;
+
+    color:white;
+
+    text-decoration:none;
 
     font-weight:bold;
+
+    transition:.3s;
 }
 
-body.nuevo-turno{
+.btn-accion:hover{
+    background:#1976d2;
+}
+
+/* ==========================
+   EVALUACION MEDICA
+========================== */
+
+body.evaluacion-medica{
 
     min-height:100vh;
 
@@ -131,7 +122,7 @@ body.nuevo-turno{
 
 .form-card{
 
-    width:800px;
+    width:900px;
 
     background:white;
 
@@ -140,6 +131,24 @@ body.nuevo-turno{
     padding:40px;
 
     box-shadow:0 15px 40px rgba(0,0,0,.15);
+}
+
+.paciente-info{
+
+    background:#f5f9ff;
+
+    border:2px solid #bbdefb;
+
+    border-radius:25px;
+
+    padding:20px;
+
+    margin-bottom:25px;
+}
+
+.paciente-info h2{
+    color:#1565c0;
+    margin-bottom:10px;
 }
 
 .grupo{
@@ -157,11 +166,11 @@ body.nuevo-turno{
     font-weight:bold;
 }
 
-.grupo select,
-.grupo input,
 .grupo textarea{
 
     width:100%;
+
+    min-height:130px;
 
     padding:14px;
 
@@ -174,18 +183,13 @@ body.nuevo-turno{
     border:2px solid #bbdefb;
 
     font-size:16px;
+
+    resize:vertical;
 }
 
-.grupo select:focus,
-.grupo input:focus,
 .grupo textarea:focus{
     outline:none;
     border-color:#2196f3;
-}
-
-.grupo textarea{
-    min-height:120px;
-    resize:vertical;
 }
 
 .btn-guardar{

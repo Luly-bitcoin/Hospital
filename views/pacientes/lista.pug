@@ -1,27 +1,55 @@
 doctype html
-html
+html(lang="es")
     head
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title Pacientes
+
+        link(rel="stylesheet" href="/css/pacientes.css")
 
     body
 
-        h1 Pacientes
+        .contenedor
 
-        a(href="/pacientes/nuevo")
-            | Nuevo Paciente
+            .encabezado
 
-        table(border="1")
+                h1 Gestión de Pacientes
 
-            tr
-                th DNI
-                th Nombre
-                th Apellido
-                th Sexo
+                a.btn-nuevo(href="/pacientes/nuevo")
+                    | + Nuevo Paciente
 
-            each paciente in pacientes
+            .busqueda
+                input(
+                    type="text"
+                    id="buscarPaciente"
+                    placeholder="Buscar paciente..."
+                )
 
-                tr
-                    td= paciente.dni
-                    td= paciente.nombre
-                    td= paciente.apellido
-                    td= paciente.sexo
+            table.tabla
+
+                thead
+                    tr
+                        th DNI
+                        th Nombre
+                        th Apellido
+                        th Sexo
+                        th Acciones
+
+                tbody(id="tablaPacientes")
+
+                    each paciente in pacientes
+
+                        tr
+                            td= paciente.dni
+                            td= paciente.nombre
+                            td= paciente.apellido
+                            td= paciente.sexo
+
+                            td
+
+                                a.btn-editar(
+                                    href=`/pacientes/editar/${paciente.dni}`
+                                )
+                                    | Editar
+                                    
+        script(src="/js/pacientes.js")

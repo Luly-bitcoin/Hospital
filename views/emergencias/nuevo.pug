@@ -1,9 +1,14 @@
-doctype html
-html
-    head
-        title Nueva Emergencia
+head
+    title Nueva Emergencia
 
-    body
+    link(
+        rel="stylesheet"
+        href="/css/emergencias.css"
+    )
+
+body.form-emergencia
+
+    .form-card
 
         h1 Ingreso de Emergencia
 
@@ -12,37 +17,37 @@ html
             method="POST"
         )
 
-            p Sexo
+            .grupo
 
-            select(name="sexo")
+                label Sexo
 
-                option(value="N")
-                    No identificado
+                select(name="sexo")
 
-                option(value="M")
-                    Masculino
+                    option(value="N")
+                        |NO identificado
 
-                option(value="F")
-                    Femenino
+                    option(value="M")
+                        |Masculino
 
-            p Descripción
+                    option(value="F")
+                        |Femenino
 
-            textarea(
-                name="descripcion"
-            )
+            .grupo
 
-            p Cama Emergencia
+                label Descripción
 
-            select(name="id_cama")
+                textarea(name="descripcion")
 
-                each cama in camas
+            .grupo
 
-                    option(
-                        value=cama.id_cama
-                    )
-                        = cama.codigo
+                label Cama de Emergencia
 
-            br
+                select(name="id_cama")
 
-            button(type="submit")
-                | Registrar
+                    each cama in camas
+
+                        option(value=cama.id_cama)
+                            = cama.codigo
+
+            button.btn-guardar(type="submit")
+                | Registrar Emergencia

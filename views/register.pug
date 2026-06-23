@@ -1,78 +1,146 @@
 doctype html
-html
+html(lang="es")
     head
-        title Registro
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title Registro HIS
+
+        link(rel="stylesheet" href="/css/register.css")
 
     body
 
-        h1 Registro de Usuario
+        .contenedor
 
-        form(action="/register" method="POST")
+            .registro-card
 
-            div
-                label Nombre Completo
-                br
-                input(
-                    type="text"
-                    name="nombre"
-                    required
-                )
+                .logo
+                    img(src="/img/logo.png" alt="Logo")
 
-            br
+                h1 Registro de Personal
 
-            div
-                label Usuario
-                br
-                input(
-                    type="text"
-                    name="usuario"
-                    required
-                )
+                p.subtitulo
+                    | Crear una nueva cuenta en HIS Hospital
 
-            br
+                if(error)
+                    p.mensaje-error= error
 
-            div
-                label Email
-                br
-                input(
-                    type="email"
-                    name="email"
-                )
+                form(action="/registro" method="POST")
 
-            br
+                    .fila
 
-            div
-                label Contraseña
-                br
-                input(
-                    type="password"
-                    name="password"
-                    required
-                )
+                        .grupo
+                            label Nombre
+                            input(
+                                type="text"
+                                name="nombre"
+                                placeholder="Ingrese nombre"
+                                required
+                            )
 
-            br
+                        .grupo
+                            label Apellido
+                            input(
+                                type="text"
+                                name="apellido"
+                                placeholder="Ingrese apellido"
+                                required
+                            )
 
-            div
-                label Rol
-                br
+                    .fila
 
-                select(name="id_rol")
+                        .grupo
+                            label DNI
+                            input(
+                                type="text"
+                                name="dni"
+                                placeholder="Ingrese DNI"
+                                required
+                            )
 
-                    option(value="4")
-                        | Admisión
+                        .grupo
+                            label Matrícula
+                            input(
+                                type="text"
+                                name="matricula"
+                                placeholder="Matrícula profesional"
+                            )
 
-                    option(value="2")
-                        | Enfermería
+                    .grupo
+                        label Correo Electrónico
+                        input(
+                            type="email"
+                            name="email"
+                            placeholder="correo@hospital.com"
+                            required
+                        )
 
-                    option(value="3")
-                        | Médico
+                    .grupo
+                        label Usuario
+                        input(
+                            type="text"
+                            name="usuario"
+                            placeholder="Nombre de usuario"
+                            required
+                        )
 
-            br
+                    .fila
 
-            button(type="submit")
-                | Registrarse
+                        .grupo
+                            label Contraseña
+                            input(
+                                type="password"
+                                name="password"
+                                placeholder="********"
+                                required
+                            )
 
-        br
+                        .grupo
+                            label Confirmar Contraseña
+                            input(
+                                type="password"
+                                name="confirmPassword"
+                                placeholder="********"
+                                required
+                            )
 
-        a(href="/")
-            | Volver al Login
+                    .grupo
+                        label Rol
+
+                        select(name="rol" required)
+
+                            option(value="")
+                                | Seleccionar
+
+                            option(value="ADMIN")
+                                | Administrador
+
+                            option(value="ADMISION")
+                                | Admisión
+
+                            option(value="ENFERMERIA")
+                                | Enfermería
+
+                            option(value="MEDICO")
+                                | Médico
+
+                            option(value="LIMPIEZA")
+                                | Limpieza
+                    
+                    .grupo 
+                        label Código del Rol 
+
+                        input(
+                            type="password"
+                            name="codigoRol"
+                            placeholder="Ingrese código del rol"
+                            required
+                        )
+
+                    button.btn-registrar(type="submit")
+                        | Registrar Usuario
+
+                a.btn-volver(href="/")
+                    | Volver al Login
+
+                    
+        script(src="/js/register.js")

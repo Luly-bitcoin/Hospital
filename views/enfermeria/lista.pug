@@ -3,29 +3,42 @@ html
     head
         title Enfermería
 
-    body
+        link(
+            rel="stylesheet"
+            href="/css/evaluaciones.css"
+        )
 
-        h1 Pacientes Internados
+    body.lista
 
-        table(border="1")
+        .contenedor
 
-            tr
-                th ID
-                th Paciente
-                th Fecha Ingreso
-                th Acción
+            h1 Pacientes Internados
 
-            each paciente in pacientes
+            .tabla-card
 
-                tr
-                    td= paciente.id_admision
+                table
 
-                    td= paciente.apellido + ", " + paciente.nombre
+                    thead
+                        tr
+                            th ID
+                            th Paciente
+                            th Fecha Ingreso
+                            th Acción
 
-                    td= paciente.fecha_ingreso
+                    tbody
 
-                    td
-                        a(
-                            href=`/enfermeria/evaluar/${paciente.id_admision}`
-                        )
-                            | Evaluar
+                        each paciente in pacientes
+
+                            tr
+
+                                td= paciente.id_admision
+
+                                td= paciente.apellido + ", " + paciente.nombre
+
+                                td= paciente.fecha_formateada
+
+                                td
+                                    a.btn-evaluar(
+                                        href=`/enfermeria/evaluar/${paciente.id_admision}`
+                                    )
+                                        | Evaluar

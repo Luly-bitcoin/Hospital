@@ -1,45 +1,45 @@
 doctype html
-html
+html(lang="es")
     head
-        title Login
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title HIS Hospital
+
+        link(rel="stylesheet" href="/css/login.css")
 
     body
 
-        h1 Sistema HIS
+        .contenedor
 
-        form(action="/login" method="POST")
+            .login-card
 
-            div
-                label Usuario
-                br
-                input(
-                    type="text"
-                    name="usuario"
-                    required
-                )
+                .logo
+                    img(src="/img/logo.png" alt="Logo Hospital")
 
-            br
+                h1 HIS Hospital
 
-            div
-                label Contraseña
-                br
-                input(
-                    type="password"
-                    name="password"
-                    required
-                )
+                form(action="/login" method="POST")
 
-            br
+                    .grupo
+                        label Usuario
+                        input(
+                            type="text"
+                            name="usuario"
+                            placeholder="Ingrese su usuario"
+                            required
+                        )
 
-            button(type="submit")
-                | Ingresar
+                    .grupo
+                        label Contraseña
+                        input(
+                            type="password"
+                            name="password"
+                            placeholder="Ingrese su contraseña"
+                            required
+                        )
 
-        br
+                    button.btn-login(type="submit")
+                        | Ingresar
 
-        hr
-
-        p ¿No tienes usuario?
-
-        a(href="/register")
-            button(type="button")
-                | Registrarme
+                a.btn-registro(href="/register")
+                    | Registrarme

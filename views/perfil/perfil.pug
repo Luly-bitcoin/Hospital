@@ -1,0 +1,119 @@
+doctype html
+html(lang="es")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+
+        title Mi Perfil
+
+        link(
+            rel="stylesheet"
+            href="/css/perfil.css"
+        )
+
+    body
+
+        .perfil-card
+
+            .logo
+                img(
+                    src="/img/user.png"
+                    alt="User"
+                )
+
+            .usuario
+                = usuario.usuario
+
+            .datos-grid
+
+                .grupo
+                    label Nombre
+                    input(
+                        type="text"
+                        value=usuario.nombre
+                        readonly
+                    )
+
+                .grupo
+                    label Apellido
+                    input(
+                        type="text"
+                        value=usuario.apellido
+                        readonly
+                    )
+
+                .grupo
+                    label DNI
+                    input(
+                        type="text"
+                        value=usuario.dni
+                        readonly
+                    )
+
+                .grupo
+                    label Matrícula
+
+                    if usuario.matricula
+                        input(
+                            type="text"
+                            value=usuario.matricula
+                            readonly
+                        )
+                    else
+                        input(
+                            type="text"
+                            value="No registrada"
+                            readonly
+                        )
+
+                .grupo
+                    label Correo
+
+                    input(
+                        type="email"
+                        value=usuario.email
+                        readonly
+                    )
+
+                .grupo
+                    label Rol
+
+                    input(
+                        type="text"
+                        value=usuario.rol
+                        readonly
+                    )
+
+                .grupo
+                    label Contraseña
+
+                    input(
+                        type="password"
+                        value="********"
+                        readonly
+                    )
+
+            .acciones
+
+                a.btn-principal(
+                    href="/perfil/cambiar-password"
+                )
+                    | Cambiar Contraseña
+
+                a.btn-secundario(
+                    href="/perfil/cambiar-rol"
+                )
+                    | Cambiar Rol
+
+                a.btn-volver(
+                    href="/dashboard"
+                )
+                    | Volver al Inicio
+
+                a.btn-logout(
+                    href="#"
+                    onclick="confirmarLogout()"
+                )
+                    | Cerrar Sesión
+
+            script(src="/js/perfil.js")
