@@ -3,33 +3,46 @@ html
     head
         title Alta Hospitalaria
 
-    body
-
-        h1 Alta Hospitalaria
-
-        h2= admision.apellido + ", " + admision.nombre
-
-        form(
-            action="/altas/guardar"
-            method="POST"
+        link(
+            rel="stylesheet"
+            href="/css/style.css"
         )
 
-            input(
-                type="hidden"
-                name="id_admision"
-                value=admision.id_admision
+    body
+
+        .form-card
+
+            h1
+                | Alta Hospitalaria
+
+            h2.paciente
+                = admision.apellido + ", " + admision.nombre
+
+            form(
+                action="/altas/guardar"
+                method="POST"
             )
 
-            p Indicaciones al Paciente
+                input(
+                    type="hidden"
+                    name="id_admision"
+                    value=admision.id_admision
+                )
 
-            textarea(
-                name="indicaciones"
-                rows="8"
-                cols="60"
-            )
+                .grupo
 
-            br
-            br
+                    label Indicaciones al Paciente
 
-            button(type="submit")
-                | Confirmar Alta
+                    textarea(
+                        name="indicaciones"
+                        placeholder="Ingrese las indicaciones médicas para el paciente..."
+                        required
+                    )
+
+                button.btn.btn-large.btn-success(type="submit")
+                    | Confirmar Alta
+
+                a.btn.btn-large.btn-danger(
+                    href="/altas"
+                )
+                    | Cancelar

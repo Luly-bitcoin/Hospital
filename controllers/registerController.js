@@ -18,6 +18,7 @@ export const registrarUsuario = async (req, res) => {
             apellido,
             dni,
             matricula,
+            especialidad,
             email,
             usuario,
             password,
@@ -30,7 +31,6 @@ export const registrarUsuario = async (req, res) => {
             !nombre ||
             !apellido ||
             !dni ||
-            !matricula ||
             !email ||
             !usuario ||
             !password ||
@@ -40,6 +40,15 @@ export const registrarUsuario = async (req, res) => {
         ){
             return res.render("register",{
                 error:"Todos los campos son obligatorios"
+            });
+        }
+
+        if(
+            rol === "MEDICO" &&
+            !especialidad
+        ){
+            return res.render("register",{
+                error:"Debe indicar una especialidad médica"
             });
         }
 
@@ -123,7 +132,8 @@ export const registrarUsuario = async (req, res) => {
             });
         }
 
-       const passwordHash = await bcrypt.hash(password, 10);
+        const passwordHash =
+        await bcrypt.hash(password, 10);
 
         await pool.query(
             `
@@ -147,11 +157,51 @@ export const registrarUsuario = async (req, res) => {
                 nombre,
                 apellido,
                 dni,
-                matricula,
+                matricula || null,
                 email,
                 roles[0].id_rol
             ]
         );
+
+        // Si es médico, crearlo automáticamente
+        if(rol === "MEDICO"){
+
+            const [medicos] =
+            await pool.query(`
+                SELECT *
+                FROM medicos
+                WHERE dni=?
+            `,[dni]);
+
+            if(medicos.length === 0){
+
+                await pool.query(`
+                    INSERT INTO medicos
+                    (
+                        dni,
+                        nombre,
+                        apellido,
+                        especialidad,
+                        matricula,
+                        estado
+                    )
+                    VALUES
+                    (
+                        ?,?,?,?,?,?
+                    )
+                `,[
+                    dni,
+                    nombre,
+                    apellido,
+                    especialidad,
+                    matricula,
+                    "activo"
+                ]);
+
+            }
+
+        }
+
         res.redirect("/");
 
     }catch(error){

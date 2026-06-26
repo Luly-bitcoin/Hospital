@@ -75,7 +75,8 @@ export const verCamas = async (req, res) => {
     }
 
     res.render("camas/lista", {
-        alas
+        alas,
+        rol: req.session.usuario.id_rol
     });
 
 };
@@ -196,4 +197,33 @@ export const crearCama = async (req, res) => {
         console.error(error);
         res.sendStatus(500);
     }
+};
+
+export const limpiarCama = async(req,res)=>{
+
+    try{
+
+        const idCama =
+        req.params.id;
+
+        await pool.query(
+            `
+            UPDATE camas
+            SET estado='libre'
+            WHERE id_cama=?
+            AND estado='higienizando'
+            `,
+            [idCama]
+        );
+
+        res.sendStatus(200);
+
+    }catch(error){
+
+        console.error(error);
+
+        res.sendStatus(500);
+
+    }
+
 };

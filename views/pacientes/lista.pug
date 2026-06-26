@@ -5,9 +5,11 @@ html(lang="es")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title Pacientes
 
-        link(rel="stylesheet" href="/css/pacientes.css")
+        link(rel="stylesheet" href="/css/style.css")
 
     body
+
+        include ../header
 
         .contenedor
 
@@ -15,7 +17,7 @@ html(lang="es")
 
                 h1 Gestión de Pacientes
 
-                a.btn-nuevo(href="/pacientes/nuevo")
+                a.btn.btn-success.btn-small(href="/pacientes/nuevo")
                     | + Nuevo Paciente
 
             .busqueda

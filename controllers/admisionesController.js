@@ -43,10 +43,13 @@ export const mostrarNuevaAdmision = async (req, res) => {
         WHERE activo = 1
     `);
 
-    const [camas] = await pool.query(`
-        SELECT *
-        FROM camas
-        WHERE estado='libre'
+   const [camas] = await pool.query(`
+        SELECT
+            c.id_cama,
+            c.codigo,
+            c.id_habitacion
+        FROM camas c
+        WHERE c.estado='libre'
     `);
 
     res.render("admisiones/nueva", {
@@ -57,32 +60,90 @@ export const mostrarNuevaAdmision = async (req, res) => {
 
 export const guardarAdmision = async (req, res) => {
 
-    const {
-        dni_paciente,
-        motivo,
-        id_cama
-    } = req.body;
+    try{
 
-    await pool.query(`
-        INSERT INTO admisiones
-        (
+        const {
             dni_paciente,
             motivo,
-            estado,
             id_cama
-        )
-        VALUES (?, ?, 'activa', ?)
-    `, [
-        dni_paciente,
-        motivo,
-        id_cama
-    ]);
+        } = req.body;
 
-    await pool.query(`
-        UPDATE camas
-        SET estado='ocupada'
-        WHERE id_cama=?
-    `, [id_cama]);
+        const [[paciente]] =
+        await pool.query(`
+            SELECT sexo
+            FROM pacientes
+            WHERE dni = ?
+        `,[dni_paciente]);
 
-    res.redirect("/admisiones");
+        const [[cama]] =
+        await pool.query(`
+            SELECT
+                c.id_cama,
+                h.id_habitacion
+            FROM camas c
+            JOIN habitaciones h
+                ON c.id_habitacion = h.id_habitacion
+            WHERE c.id_cama = ?
+        `,[id_cama]);
+
+        const [ocupantes] =
+        await pool.query(`
+            SELECT
+                p.sexo
+            FROM camas c
+            JOIN admisiones a
+                ON a.id_cama = c.id_cama
+                AND a.estado = 'activa'
+            JOIN pacientes p
+                ON p.dni = a.dni_paciente
+            WHERE c.id_habitacion = ?
+        `,[cama.id_habitacion]);
+
+        for(const ocupante of ocupantes){
+
+            if(
+                ocupante.sexo !== paciente.sexo
+            ){
+
+                return res.send(
+                    "No se puede internar pacientes de distinto sexo en la misma habitación."
+                );
+
+            }
+
+        }
+
+        await pool.query(`
+            INSERT INTO admisiones
+            (
+                dni_paciente,
+                motivo,
+                estado,
+                id_cama
+            )
+            VALUES (?, ?, 'activa', ?)
+        `,[
+            dni_paciente,
+            motivo,
+            id_cama
+        ]);
+
+        await pool.query(`
+            UPDATE camas
+            SET estado='ocupada'
+            WHERE id_cama=?
+        `,[id_cama]);
+
+        res.redirect("/admisiones");
+
+    }catch(error){
+
+        console.log(error);
+
+        res.send(
+            "Error al registrar admisión"
+        );
+
+    }
+
 };

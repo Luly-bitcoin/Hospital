@@ -1,0 +1,572 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+body{
+    background:#f4f7fb;
+    min-height:100vh;
+    padding:40px;
+}
+.contenedor{
+    max-width:1200px;
+    margin:auto;
+}
+.menu-lateral{
+    width:250px;
+    background:#1565c0;
+    color:white;
+    padding:20px;
+}
+.menu-lateral h2{
+    text-align:center;
+    margin-bottom:25px;
+}
+.contenido{
+    flex:1;
+    padding:30px;
+}
+.resumen{
+    display:flex;
+    gap:20px;
+    margin-bottom:25px;
+}
+.card-resumen{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    min-width:180px;
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+    text-align:center;
+}
+.card-resumen h3{
+    color:#666;
+    margin-bottom:10px;
+}
+.card-resumen span{
+    font-size:28px;
+    font-weight:bold;
+    color:#1565c0;
+}
+.tabla-container{
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+thead{
+    background:#1565c0;
+    color:white;
+}
+tbody tr{
+    border-bottom:1px solid #e5e5e5;
+    transition:.3s;
+}
+tbody tr:hover{
+    background:#f5faff;
+}
+.estado{
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:bold;
+}
+.estado.activa{
+    background:#d4edda;
+    color:#155724;
+}
+.estado.alta{
+    background:#cce5ff;
+    color:#004085;
+}
+.estado.cancelada{
+    background:#f8d7da;
+    color:#721c24;
+}
+.form-card{
+    width:100%;
+    max-width:700px;
+    margin:auto;
+    background:white;
+    padding:35px;
+    border-radius:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+.mensaje-error{
+    background:#ffe5e5;
+    color:#c62828;
+    border:1px solid #ef9a9a;
+    padding:12px;
+    border-radius:8px;
+    margin-bottom:15px;
+    text-align:center;
+    font-weight:bold;
+}
+.titulo{
+    text-align:center;
+    color:#1565c0;
+    margin-bottom:30px;
+}
+.card{
+    background:white;
+    border-radius:15px;
+    padding:25px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+td{
+    padding:15px;
+    text-align:left;
+}
+.paciente{
+    text-align:center;
+    margin-bottom:25px;
+    color:#555;
+}
+textarea{
+    resize:vertical;
+    min-height:180px;
+    border:1px solid #ccc;
+    border-radius:10px;
+    padding:12px;
+    font-size:15px;
+}
+h1{
+    text-align:center;
+    color:#1565c0;
+    margin-bottom:25px;
+}
+.tabla-card{
+    background:white;
+    border-radius:35px;
+    padding:30px;
+    box-shadow:0 15px 40px rgba(0,0,0,.15);
+}
+th{
+    background:#1565c0;
+    color:white;
+    padding:15px;
+}
+.estado.sin_identificar{
+    background:#ffebee;
+    color:#c62828;
+}
+.estado.identificada{
+    background:#e8f5e9;
+    color:#2e7d32;
+}
+.sin-identificar{
+    color:#d32f2f;
+    font-weight:bold;
+}
+.codigo-temporal{
+    background:#ffebee;
+    color:#c62828;
+    text-align:center;
+    padding:15px;
+    border-radius:20px;
+    margin-bottom:25px;
+    font-weight:bold;
+    font-size:20px;
+}
+.header-emergencias{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+.acciones-superiores{
+    display:flex;
+    gap:10px;
+}
+th:first-child{
+    border-top-left-radius:15px;
+}
+th:last-child{
+    border-top-right-radius:15px;
+}
+.paciente-info{
+    background:#f5f9ff;
+    border:2px solid #bbdefb;
+    border-radius:25px;
+    padding:20px;
+    margin-bottom:25px;
+}
+.paciente-info h2{
+    color:#1565c0;
+}
+.grupo input,
+.grupo select,
+.grupo textarea{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:20px;
+    background:#f5f9ff;
+    border:2px solid #bbdefb;
+    font-size:16px;
+}
+.grupo input:focus,
+.grupo select:focus,
+.grupo textarea:focus{
+    outline:none;
+    border-color:#2196f3;
+}
+.fila{
+    display:flex;
+    gap:20px;
+}
+.fila .grupo{
+    flex:1;
+}
+body.evaluacion{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(
+        135deg,
+        #e3f2fd,
+        #bbdefb,
+        #90caf9
+    );
+    padding:40px;
+}
+h2{
+    color:#1f4e79;
+    margin-bottom:15px;
+}
+h3{
+    color:#2980b9;
+    margin-top:20px;
+    margin-bottom:15px;
+    border-left:4px solid #3498db;
+    padding-left:10px;
+}
+a{
+    text-decoration:none;
+}
+td a{
+    background:#3498db;
+    color:white;
+    padding:8px 14px;
+    border-radius:6px;
+    transition:.3s;
+    font-weight:600;
+}
+td a:hover{
+    background:#2980b9;
+}
+p{
+    margin-bottom:10px;
+    line-height:1.6;
+}
+b{
+    color:#34495e;
+}
+hr{
+    border:none;
+    height:1px;
+    background:#dbe4ee;
+    margin:25px 0;
+}
+.internacion{
+    background:white;
+    padding:25px;
+    margin-bottom:25px;
+    border-radius:12px;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+.datos-paciente{
+    background:white;
+    padding:25px;
+    margin-bottom:25px;
+    border-radius:12px;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+.seccion{
+    background:#f8fafc;
+    border-radius:10px;
+    padding:15px;
+    margin-top:15px;
+}
+.estado-activa{
+    color:#27ae60;
+    font-weight:bold;
+}
+.estado-finalizada{
+    color:#c0392b;
+    font-weight:bold;
+}
+@media(max-width:768px){
+    body{
+        padding:15px;
+    }
+    table{
+        display:block;
+        overflow-x:auto;
+    }
+    td a{
+        display:inline-block;
+        margin-top:5px;
+    }
+}
+.acciones{
+    display:flex;
+    justify-content:flex-end;
+    margin-bottom:20px;
+}
+.estado-activo{
+    color:#27ae60;
+    font-weight:bold;
+}
+.estado-inactivo{
+    color:#c0392b;
+    font-weight:bold;
+}
+.encabezado{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+.busqueda{
+    margin-bottom:20px;
+}
+.busqueda input{
+    width:100%;
+    padding:12px;
+    border-radius:10px;
+    border:1px solid #ccc;
+}
+.registro-card{
+    width:850px;
+    background:white;
+    border-radius:40px;
+    padding:40px;
+    box-shadow:0 15px 40px rgba(0,0,0,.15);
+}
+.logo{
+    text-align:center;
+    margin-bottom:20px;
+}
+.logo img{
+    width:110px;
+    height:110px;
+    border-radius:50%;
+    border:4px solid #2196f3;
+}
+.subtitulo{
+    text-align:center;
+    color:#666;
+    margin-bottom:30px;
+}
+
+
+
+
+/* ===========================================
+                BOTONES
+=========================================== */
+
+.btn{
+
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    text-decoration:none;
+    border:none;
+    outline:none;
+    cursor:pointer;
+    border-radius:12px;
+    font-weight:bold;
+    transition:.3s;
+    padding:12px 22px;
+    margin-top: 20px;
+    margin-right: 20px;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+/* ---------- Azul ---------- */
+
+.btn-primary{
+
+    background:#2196f3;
+    color:white;
+}
+
+.btn-primary:hover{
+    background:#1976d2;
+}
+
+/* ---------- Verde ---------- */
+
+.btn-success{
+
+    background:#4caf50;
+    color:white;
+}
+
+.btn-success:hover{
+
+    background:#43a047;
+
+    box-shadow:0 5px 12px rgba(76,175,80,.35);
+}
+
+/* ---------- Rojo ---------- */
+
+.btn-danger{
+
+    background:#e53935;
+    color:white;
+}
+
+.btn-danger:hover{
+
+    background:#c62828;
+
+    box-shadow:0 5px 12px rgba(229,57,53,.35);
+}
+
+/* ---------- Blanco ---------- */
+
+.btn-outline{
+
+    background:white;
+    color:#1565c0;
+
+    border:2px solid #1565c0;
+}
+
+.btn-outline:hover{
+
+    background:#1565c0;
+
+    color:white;
+}
+
+/* ---------- Gris ---------- */
+
+.btn-secondary{
+
+    background:#eceff1;
+
+    color:#455a64;
+}
+
+.btn-secondary:hover{
+
+    background:#cfd8dc;
+}
+
+.btn-orange{
+
+    background:#ff7708;
+
+    color: white;
+}
+
+.btn-orange:hover{
+
+    background:#ff7708;
+
+}
+
+/* ---------- Tamaños ---------- */
+
+.btn-small{
+
+    padding:8px 16px;
+
+    font-size:14px;
+}
+
+.btn-large{
+
+    padding:18px 35px;
+
+    font-size:18px;
+}
+
+.btn-full{
+
+    width:100%;
+}
+
+.btn-circle{
+
+    border-radius:50px;
+}
+
+/* Botones agregar camas, habitaciones y alas */
+
+.btn-agregar-cama{
+
+    height:50px;
+
+    width: 100px;
+
+    border:2px dashed #1565c0;
+
+    border-radius:12px;
+
+    background:white;
+
+    color:#1565c0;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.btn-agregar-cama :hover{
+
+    transform: scale(1.03);
+    filter: brightness(1.1);
+}
+
+.btn-agregar-habitacion{
+
+    min-height:180px;
+
+    border:3px dashed #4caf50;
+
+    border-radius:15px;
+
+    background:#f7fff7;
+
+    color:#4caf50;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+
+.btn-emergencia{
+    position:absolute;
+    background:#e53935;
+    color:white;
+    text-decoration:none;
+    font-size:28px;
+    font-weight:bold;
+    border-radius:60px;
+    box-shadow:0 0 30px rgba(229,57,53,.6);
+    transition:.3s;
+}
+.btn-emergencia:hover{
+    transform:scale(1.1);
+    background:#c62828;
+}

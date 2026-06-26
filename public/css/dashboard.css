@@ -173,3 +173,11 @@ body{
 
     margin-top:20px;
 }
+
+.mensaje-error{
+    background:#fee2e2;
+    color:#b91c1c;
+    padding:12px;
+    border-radius:8px;
+    margin-bottom:15px;
+}

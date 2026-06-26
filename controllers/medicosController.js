@@ -1,4 +1,11 @@
 import pool from "../config/db.js";
+import { validarDNI,
+        soloTexto,
+        validarTelefono,
+        validarFechaNacimiento,
+        validarEmail,
+        validarMatricula
+    } from "../middlewares/validaciones.js";
 
 export const listarMedicos = async (req, res) => {
 
@@ -31,6 +38,10 @@ export const guardarMedico = async (req, res) => {
         especialidad,
         matricula
     } = req.body;
+
+    if(!validarDNI(dni) || !soloTexto(nombre) || !soloTexto(apellido) || !validarSexo(sexo) || !validarFechaNacimiento(fecha_nacimiento) || !validarTelefono(telefono) || !validarEmail(correo_electronico) || !soloTexto(especialidad) || !validarMatricula(matricula)) {
+        return res.status(400).json({ error: "Datos inválidos" });
+    }
 
     await pool.query(`
         INSERT INTO medicos

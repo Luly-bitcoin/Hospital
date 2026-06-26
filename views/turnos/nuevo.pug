@@ -5,7 +5,7 @@ html
 
         link(
             rel="stylesheet"
-            href="/css/turnos.css"
+            href="/css/style.css"
         )
 
     body.nuevo-turno
@@ -48,6 +48,7 @@ html
                     input(
                         type="datetime-local"
                         name="fecha_solicitada"
+                        id="fecha_solicitada"
                     )
 
                 .grupo
@@ -56,5 +57,7 @@ html
 
                     textarea(name="motivo")
 
-                button.btn-guardar(type="submit")
+                button.btn.btn-full.btn-success(type="submit")
                     | Guardar Turno
+
+            script(src="/js/turnos.js")

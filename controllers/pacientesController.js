@@ -1,4 +1,11 @@
 import pool from "../config/db.js";
+import {
+    soloTexto,
+    validarDNI,
+    validarTelefono,
+    validarFechaNacimiento,
+    validarLocalidad,
+} from "../middlewares/validaciones.js";
 
 export const listarPacientes = async (req, res) => {
 
@@ -27,6 +34,10 @@ export const agregarPaciente = async (req, res) => {
         telefono,
         localidad
     } = req.body;
+
+    if(!validarDNI(dni) || !soloTexto(nombre) || !soloTexto(apellido) || !validarFechaNacimiento(fecha_nacimiento) || !validarTelefono(telefono) || !validarLocalidad(localidad)) {
+        return res.status(400).json({ error: "Datos inválidos" });
+    }
 
     await pool.query(
         `
@@ -88,7 +99,12 @@ export const editarPaciente = async (req, res) => {
         localidad
     } = req.body;
 
+    if(!validarDNI(dni) || !soloTexto(nombre) || !soloTexto(apellido) || !validarFechaNacimiento(fecha_nacimiento) || !validarTelefono(telefono) || !validarLocalidad(localidad)) {
+         return res.status(400).json({ error: "Datos inválidos" });
+    }
+
     await pool.query(
+
         `
         UPDATE pacientes
         SET

@@ -5,7 +5,7 @@ html(lang="es")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title Nuevo Paciente
 
-        link(rel="stylesheet" href="/css/pacientes.css")
+        link(rel="stylesheet" href="/css/style.css")
 
     body
 
@@ -72,8 +72,8 @@ html(lang="es")
                             name="localidad"
                         )
 
-                    button.btn-guardar(type="submit")
+                    button.btn.btn-circle.btn-primary(type="submit")
                         | Guardar Paciente
 
-                    a.btn-volver(href="/pacientes")
+                    a.btn.btn-circle.btn-danger(href="/pacientes")
                         | Cancelar

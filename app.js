@@ -12,6 +12,7 @@ import medicoRoutes from "./routes/medicoRoutes.js";
 import altasRoutes from "./routes/altasRoutes.js";
 import { mostrarDashboard } from "./controllers/dashboardController.js";
 import { verificarSesion } from "./middlewares/authMiddlewares.js";
+import { cargarDatosVista } from "./middlewares/viewMiddlewares.js";
 import medicosRoutes from "./routes/medicosRoutes.js";
 import turnosRoutes from "./routes/turnosRoutes.js";
 import historialRoutes from "./routes/historialRoutes.js";
@@ -45,6 +46,7 @@ app.use(
 );
 
 app.use("/", authRoutes);
+app.use(cargarDatosVista);
 app.use("/pacientes", pacientesRoutes);
 app.use("/admisiones", admisionesRoutes);
 app.use("/enfermeria", enfermeriaRoutes);

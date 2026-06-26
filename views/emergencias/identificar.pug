@@ -3,7 +3,7 @@ head
 
     link(
         rel="stylesheet"
-        href="/css/emergencias.css"
+        href="/css/style.css"
     )
 
 body.form-emergencia
@@ -29,5 +29,5 @@ body.form-emergencia
                         option(value=paciente.dni)
                             = paciente.apellido + ", " + paciente.nombre
 
-            button.btn-guardar(type="submit")
+            button.btn.btn-circle.btn-success(type="submit")
                 | Asociar Paciente

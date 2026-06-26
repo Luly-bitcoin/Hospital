@@ -8,112 +8,134 @@ html(lang="es")
 
         link(
             rel="stylesheet"
-            href="/css/perfil.css"
+            href="/css/hospital.css"
         )
 
-    body
+    body(style="display:flex; justify-content:center; align-items:center; padding:40px;")
+    
 
         .perfil-card
 
-            .logo
+            .logo-perfil
                 img(
                     src="/img/user.png"
                     alt="User"
                 )
 
-            .usuario
+            .usuario-perfil
                 = usuario.usuario
 
-            .datos-grid
+            if(error)
+                .mensaje-error= error
 
-                .grupo
-                    label Nombre
-                    input(
-                        type="text"
-                        value=usuario.nombre
-                        readonly
-                    )
+            form(
+                action="/perfil/editar"
+                method="POST"
+                id="formPerfil"
+            )
 
-                .grupo
-                    label Apellido
-                    input(
-                        type="text"
-                        value=usuario.apellido
-                        readonly
-                    )
+                .datos-grid
 
-                .grupo
-                    label DNI
-                    input(
-                        type="text"
-                        value=usuario.dni
-                        readonly
-                    )
+                    .grupo
+                        label Nombre
 
-                .grupo
-                    label Matrícula
-
-                    if usuario.matricula
-                        input(
+                        input.editable(
                             type="text"
-                            value=usuario.matricula
-                            readonly
-                        )
-                    else
-                        input(
-                            type="text"
-                            value="No registrada"
+                            name="nombre"
+                            value=usuario.nombre
                             readonly
                         )
 
-                .grupo
-                    label Correo
+                    .grupo
+                        label Apellido
 
-                    input(
-                        type="email"
-                        value=usuario.email
-                        readonly
+                        input.editable(
+                            type="text"
+                            name="apellido"
+                            value=usuario.apellido
+                            readonly
+                        )
+
+                    .grupo
+                        label DNI
+
+                        input(
+                            type="text"
+                            value=usuario.dni
+                            readonly
+                        )
+
+                    .grupo
+                        label Matrícula
+
+                        if usuario.matricula
+                            input(
+                                type="text"
+                                value=usuario.matricula
+                                readonly
+                            )
+                        else
+                            input(
+                                type="text"
+                                value="No registrada"
+                                readonly
+                            )
+
+                    .grupo
+                        label Correo
+
+                        input.editable(
+                            type="email"
+                            name="email"
+                            value=usuario.email
+                            readonly
+                        )
+
+                    .grupo
+                        label Rol
+
+                        input(
+                            type="text"
+                            value=usuario.rol
+                            readonly
+                        )
+
+                    .grupo
+                        label Contraseña
+
+                        input(
+                            type="password"
+                            value="********"
+                            readonly
+                        )
+
+                .acciones
+
+                    button.btn.btn-full.btn-primary(
+                        type="button"
+                        id="btnEditar"
                     )
+                        | Editar Perfil
 
-                .grupo
-                    label Rol
-
-                    input(
-                        type="text"
-                        value=usuario.rol
-                        readonly
+                    a.btn.btn-full.btn-primary(
+                        href="/perfil/cambiar-password"
                     )
+                        | Cambiar Contraseña
 
-                .grupo
-                    label Contraseña
-
-                    input(
-                        type="password"
-                        value="********"
-                        readonly
+                    a.btn.btn-full.btn-success(
+                        href="/perfil/cambiar-rol"
                     )
+                        | Cambiar Rol
 
-            .acciones
+                    a.btn.btn-full.btn-secondary(
+                        href="/dashboard"
+                    )
+                        | Volver al Inicio
 
-                a.btn-principal(
-                    href="/perfil/cambiar-password"
-                )
-                    | Cambiar Contraseña
-
-                a.btn-secundario(
-                    href="/perfil/cambiar-rol"
-                )
-                    | Cambiar Rol
-
-                a.btn-volver(
-                    href="/dashboard"
-                )
-                    | Volver al Inicio
-
-                a.btn-logout(
-                    href="#"
-                    onclick="confirmarLogout()"
-                )
-                    | Cerrar Sesión
+                    a.btn.btn-full.btn-danger(
+                        href="#"
+                        onclick="confirmarLogout()"
+                    )
+                        | Cerrar Sesión
 
             script(src="/js/perfil.js")

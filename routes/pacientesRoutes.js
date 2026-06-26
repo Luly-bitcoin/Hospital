@@ -7,18 +7,18 @@ import {
     mostrarEditar,
     editarPaciente
 } from "../controllers/pacientesController.js";
-import { verificarSesion } from "../middlewares/authMiddlewares.js";
+import { verificarSesion, permitirRoles} from "../middlewares/authMiddlewares.js";
 
 const router = Router();
 
-router.get("/", verificarSesion, listarPacientes);
+router.get("/", verificarSesion, permitirRoles(1, 2, 3, 4), listarPacientes);
 
-router.get("/nuevo", verificarSesion, mostrarAgregar);
+router.get("/nuevo", verificarSesion, permitirRoles(1, 2, 3, 4), mostrarAgregar);
 
-router.post("/nuevo", verificarSesion, agregarPaciente);
+router.post("/nuevo", verificarSesion, permitirRoles(1, 2, 3, 4), agregarPaciente);
 
-router.get("/editar/:dni", verificarSesion, mostrarEditar);
+router.get("/editar/:dni", verificarSesion, permitirRoles(1, 2, 3, 4), mostrarEditar);
 
-router.post("/editar/:dni", verificarSesion, editarPaciente);
+router.post("/editar/:dni", verificarSesion, permitirRoles(1, 2, 3, 4), editarPaciente);
 
 export default router;

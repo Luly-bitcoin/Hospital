@@ -5,18 +5,18 @@ html
 
         link(
             rel="stylesheet"
-            href="/css/turnos.css"
+            href="/css/style.css"
         )
 
     body.lista-turnos
-
+    
         .contenedor
 
             h1 Gestión de Turnos
 
             .acciones
 
-                a.btn-nuevo(
+                a.btn.btn-circle.btn-success(
                     href="/turnos/nuevo"
                 )
                     | + Nuevo Turno
@@ -30,7 +30,7 @@ html
                             th Paciente
                             th Médico
                             th Fecha
-                            th Estado
+                            th Motivo
 
                     tbody
 
@@ -43,6 +43,4 @@ html
 
                                 td= turno.fecha_formateada
 
-                                td
-                                    span.estado
-                                        = turno.estado
+                                td= turno.motivo

@@ -14,6 +14,7 @@ export const listarTurnos = async (req, res) => {
             ON p.dni = t.dni_paciente
         JOIN medicos m
             ON m.id_medico = t.id_medico
+        WHERE t.fecha_solicitada >= NOW()
         ORDER BY t.fecha_solicitada
     `);
 
@@ -65,6 +66,19 @@ export const guardarTurno = async (req, res) => {
         fecha_solicitada,
         motivo
     } = req.body;
+
+    const ahora = new Date();
+
+    const fechaTurno =
+        new Date(fecha_solicitada);
+
+    if(fechaTurno <= ahora){
+
+        return res.send(
+            "No se puede asignar un turno en una fecha u hora pasada"
+        );
+
+    }
 
     await pool.query(`
         INSERT INTO turnos

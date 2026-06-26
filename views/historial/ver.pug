@@ -2,102 +2,107 @@ doctype html
 html
     head
         title Historia Clínica
+        link(rel="stylesheet", href="/css/style.css")
 
     body
 
         h1 Historia Clínica
 
-        h2= paciente.apellido + ", " + paciente.nombre
+        .datos-paciente
 
-        p
-            b DNI:
-            | #{paciente.dni}
+            h2= paciente.apellido + ", " + paciente.nombre
 
-        p
-            b Sexo:
-            | #{paciente.sexo}
+            p
+                b DNI:
+                | #{paciente.dni}
 
-        p
-            b Edad:
-            | #{paciente.edad}
+            p
+                b Sexo:
+                | #{paciente.sexo}
 
-        hr
+            p
+                b Edad:
+                | #{paciente.edad}
+
+            hr
 
         each item in internaciones
 
-            h2 Internación ##{item.id_admision}
+            .internacion
 
-            p
-                b Fecha ingreso:
-                | #{item.fecha_ingreso}
+                h2 Internación ##{item.id_admision}
 
-            p
-                b Estado:
-                | #{item.estado}
+                p
+                    b Fecha ingreso:
+                    | #{item.fecha_ingreso}
 
-            p
-                b Motivo:
-                | #{item.motivo}
+                p
+                    b Estado:
+                    | #{item.estado}
 
-            hr
+                p
+                    b Motivo:
+                    | #{item.motivo}
 
-            h3 Evaluación Enfermería
+                hr
 
-            p
-                b Antecedentes:
-                | #{item.antecedentes || "-"}
+                h3 Evaluación Enfermería
 
-            p
-                b Alergias:
-                | #{item.alergias || "-"}
+                p
+                    b Antecedentes:
+                    | #{item.antecedentes || "-"}
 
-            p
-                b Medicamentos:
-                | #{item.medicamentos || "-"}
+                p
+                    b Alergias:
+                    | #{item.alergias || "-"}
 
-            p
-                b Temperatura:
-                | #{item.signos_vitales_temp || "-"}
+                p
+                    b Medicamentos:
+                    | #{item.medicamentos || "-"}
 
-            p
-                b Frecuencia Cardíaca:
-                | #{item.signos_vitales_fc || "-"}
+                p
+                    b Temperatura:
+                    | #{item.signos_vitales_temp || "-"}
 
-            p
-                b Presión Arterial:
-                | #{item.signos_vitales_pa || "-"}
+                p
+                    b Frecuencia Cardíaca:
+                    | #{item.signos_vitales_fc || "-"}
 
-            hr
+                p
+                    b Presión Arterial:
+                    | #{item.signos_vitales_pa || "-"}
 
-            h3 Evaluación Médica
+                hr
 
-            p
-                b Diagnóstico:
-                | #{item.diagnostico || "-"}
+                h3 Evaluación Médica
 
-            p
-                b Estudios:
-                | #{item.estudios || "-"}
+                p
+                    b Diagnóstico:
+                    | #{item.diagnostico || "-"}
 
-            p
-                b Tratamiento:
-                | #{item.tratamiento || "-"}
+                p
+                    b Estudios:
+                    | #{item.estudios || "-"}
 
-            p
-                b Evolución:
-                | #{item.evolucion || "-"}
+                p
+                    b Tratamiento:
+                    | #{item.tratamiento || "-"}
 
-            hr
+                p
+                    b Evolución:
+                    | #{item.evolucion || "-"}
 
-            h3 Alta Hospitalaria
+                hr
 
-            p
-                b Fecha Alta:
-                | #{item.fecha_alta || "Sin alta"}
+                h3 Alta Hospitalaria
 
-            p
-                b Indicaciones:
-                | #{item.indicaciones || "-"}
+                p
+                    b Fecha Alta:
+                    | #{item.fecha_alta || "Sin alta"}
 
-            hr
-            hr
+                p
+                    b Indicaciones:
+                    | #{item.indicaciones || "-"}
+
+                hr
+                hr

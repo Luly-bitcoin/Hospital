@@ -1,0 +1,86 @@
+doctype html
+html(lang="es")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+
+        title Cambiar Rol
+
+        link(
+            rel="stylesheet"
+            href="/css/perfil.css"
+        )
+
+    body
+
+        .perfil-card
+
+            h1 Cambiar Rol
+
+            if(error)
+                .error= error
+
+            if(success)
+                .success= success
+
+            form(
+                action="/perfil/cambiar-rol"
+                method="POST"
+            )
+
+                .grupo
+                    label Rol Actual
+
+                    input(
+                        type="text"
+                        value=usuario.rol
+                        readonly
+                    )
+
+                .grupo
+                    label Nuevo Rol
+
+                    select.rol-select(
+                        name="rol"
+                        required
+                    )
+
+                        option(value="")
+                            | Seleccionar
+
+                        option(value="ADMIN")
+                            | Administrador
+
+                        option(value="ADMISION")
+                            | Admisión
+
+                        option(value="ENFERMERIA")
+                            | Enfermería
+
+                        option(value="MEDICO")
+                            | Médico
+
+                        option(value="LIMPIEZA")
+                            | Limpieza
+
+                .grupo
+                    label Código del Rol
+
+                    input(
+                        type="password"
+                        name="codigoRol"
+                        placeholder="Ingrese el código del rol"
+                        required
+                    )
+
+                .acciones
+
+                    button.btn-principal(
+                        type="submit"
+                    )
+                        | Guardar Cambios
+
+                    a.btn-volver(
+                        href="/perfil"
+                    )
+                        | Cancelar

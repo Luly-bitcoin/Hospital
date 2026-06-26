@@ -66,3 +66,30 @@ form.addEventListener(
 
     }
 );
+
+const rol =
+document.querySelector("#rol");
+
+const grupoEspecialidad =
+document.querySelector("#grupoEspecialidad");
+
+function actualizarCamposRol(){
+
+    if(rol.value === "MEDICO"){
+
+        grupoEspecialidad.style.display = "block";
+
+    }else{
+
+        grupoEspecialidad.style.display = "none";
+
+    }
+
+}
+
+rol.addEventListener(
+    "change",
+    actualizarCamposRol
+);
+
+actualizarCamposRol();

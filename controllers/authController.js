@@ -49,7 +49,7 @@ export const logout = (req, res) => {
 };
 
 export const mostrarRegistro = (req, res) => {
-    res.render("register");
+    res.render("register/register");
 };
 
 export const registrar = async (req, res) => {

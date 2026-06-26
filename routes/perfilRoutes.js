@@ -1,9 +1,13 @@
 import express from "express";
 
 import {
-    mostrarPerfil
+    mostrarPerfil,
+    mostrarVistaPassword,
+    mostrarVistaRol,
+    cambiarPassword,
+    cambiarRol,
+    editarPerfil
 } from "../controllers/perfilController.js";
-
 import {
     verificarSesion
 } from "../middlewares/authMiddlewares.js";
@@ -29,5 +33,35 @@ router.get("/", (req, res) => {
     });
 
 });
+
+router.get(
+    "/cambiar-password",
+    verificarSesion,
+    mostrarVistaPassword
+);
+
+router.post(
+    "/cambiar-password",
+    verificarSesion,
+    cambiarPassword
+);
+
+router.get(
+    "/cambiar-rol",
+    verificarSesion,
+    mostrarVistaRol
+);
+
+router.post(
+    "/cambiar-rol",
+    verificarSesion,
+    cambiarRol
+);
+
+router.post(
+    "/editar",
+    verificarSesion,
+    editarPerfil
+);
 
 export default router;

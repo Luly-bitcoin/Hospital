@@ -3,43 +3,87 @@ html
     head
         title Nuevo Médico
 
+        link(
+            rel="stylesheet"
+            href="/css/style.css"
+        )
+
     body
 
-        h1 Registrar Médico
+        .form-card
 
-        form(action="/medicos/guardar" method="POST")
+            h1 Registrar Médico
 
-            p DNI
-            input(type="number" name="dni")
+            .grupo
 
-            p Nombre
-            input(type="text" name="nombre")
+                form(
+                    action="/medicos/guardar"
+                    method="POST"
+                )
 
-            p Apellido
-            input(type="text" name="apellido")
+                    label DNI
+                    input(
+                        type="number"
+                        name="dni"
+                        required
+                    )
 
-            p Sexo
+                    label Nombre
+                    input(
+                        type="text"
+                        name="nombre"
+                        required
+                    )
 
-            select(name="sexo")
-                option(value="M") Masculino
-                option(value="F") Femenino
+                    label Apellido
+                    input(
+                        type="text"
+                        name="apellido"
+                        required
+                    )
 
-            p Fecha Nacimiento
-            input(type="date" name="fecha_nacimiento")
+                    label Sexo
 
-            p Teléfono
-            input(type="text" name="telefono")
+                    select(
+                        name="sexo"
+                    )
+                        option(value="M") Masculino
+                        option(value="F") Femenino
 
-            p Correo
-            input(type="email" name="correo_electronico")
+                    label Fecha de Nacimiento
 
-            p Especialidad
-            input(type="text" name="especialidad")
+                    input(
+                        type="date"
+                        name="fecha_nacimiento"
+                    )
 
-            p Matrícula
-            input(type="text" name="matricula")
+                    label Teléfono
 
-            br
+                    input(
+                        type="text"
+                        name="telefono"
+                    )
 
-            button(type="submit")
-                | Guardar Médico
+                    label Correo Electrónico
+
+                    input(
+                        type="email"
+                        name="correo_electronico"
+                    )
+
+                    label Especialidad
+
+                    input(
+                        type="text"
+                        name="especialidad"
+                    )
+
+                    label Matrícula
+
+                    input(
+                        type="text"
+                        name="matricula"
+                    )
+
+                    button.btn.btn-full.btn-success(type="submit")
+                        | Guardar Médico

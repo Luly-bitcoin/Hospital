@@ -6,9 +6,11 @@ html(lang="es")
 
         title Gestión de Camas
 
-        link(rel="stylesheet" href="/css/camas.css")
+        link(rel="stylesheet" href="/css/hospital.css")
 
     body
+
+        include ../header
 
         .contenedor
 
@@ -30,10 +32,11 @@ html(lang="es")
 
                 hr
 
-                button.btn-agregar(
-                    onclick=`crearAla()`
-                )
-                    | + Ala
+                if rol != 5
+                    button.btn.btn-success(
+                        onclick=`crearAla()`
+                    )
+                        | + Ala
 
             main.contenido
 
@@ -62,22 +65,31 @@ html(lang="es")
 
                                                 .cama(
                                                     class=cama.estado
+                                                    data-id=cama.id_cama
+                                                    onclick=`limpiarCama(${cama.id_cama})`
                                                 )
-
+                                                    img.cama-img(
+                                                        src="/img/cama.png"
+                                                        alta="Cama"
+                                                    )
+                                                    
                                                     span= cama.codigo
 
-                                        if habitacion.camas.length < 2
+                                        if rol != 5 && habitacion.camas.length < 2
 
                                             button.btn-agregar-cama(
                                                 onclick=`crearCama(${habitacion.id_habitacion})`
                                             )
                                                 | + Cama
 
-                                if ala.habitaciones.length < 4
+                                if rol != 5 && ala.habitaciones.length < 4
 
                                     button.btn-agregar-habitacion(
                                         onclick=`crearHabitacion(${ala.id_ala})`
                                     )
                                         | + Habitación
+
+        script.
+            const ROL_USUARIO = !{rol};
 
         script(src="/js/camas.js")

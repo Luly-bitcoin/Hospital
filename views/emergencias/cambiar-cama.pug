@@ -1,0 +1,58 @@
+doctype html
+html(lang="es")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+
+        title Cambiar Cama
+
+        link(
+            rel="stylesheet"
+            href="/css/style.css"
+        )
+
+    body
+
+        .form-card
+
+            h1 Cambiar Cama
+
+            p.paciente
+                | Código:
+                b #{emergencia.codigo_temporal}
+
+            form(
+                action="/emergencias/cambiar-cama"
+                method="POST"
+            )
+
+                input(
+                    type="hidden"
+                    name="id_emergencia"
+                    value=emergencia.id_emergencia
+                )
+
+                .grupo
+
+                    label Nueva Cama
+
+                    select(
+                        name="id_cama"
+                        required
+                    )
+
+                        option(value="")
+                            | Seleccionar cama
+
+                        each cama in camas
+
+                            option(value=cama.id_cama)
+                                = cama.codigo
+
+                button.btn.btn-circle.btn-success(type="submit")
+                    | Guardar Cambio
+
+                a.btn.btn-circle.btn-danger(
+                    href="/emergencias"
+                )
+                    | Cancelar

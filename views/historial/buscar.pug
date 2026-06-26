@@ -3,23 +3,48 @@ html
     head
         title Historial Clínico
 
+        link(
+            rel="stylesheet"
+            href="/css/style.css"
+        )
+
     body
 
-        h1 Historial Clínico
+        include ../header
 
-        table(border="1")
+        .contenedor
 
-            tr
-                th DNI
-                th Paciente
-                th Acción
+            h1 Historial Clínico
 
-            each paciente in pacientes
+            .acciones
 
-                tr
-                    td= paciente.dni
-                    td= paciente.apellido + ", " + paciente.nombre
+                a.btn.btn-circle.btn-success(
+                    href="/dashboard"
+                )
+                    | ← Volver al Inicio
 
-                    td
-                        a(href=`/historial/${paciente.dni}`)
-                            | Ver Historial
+            table
+
+                thead
+
+                    tr
+                        th DNI
+                        th Paciente
+                        th Acción
+
+                tbody
+
+                    each paciente in pacientes
+
+                        tr
+
+                            td= paciente.dni
+
+                            td= paciente.apellido + ", " + paciente.nombre
+
+                            td
+
+                                a.btn-ver(
+                                    href=`/historial/${paciente.dni}`
+                                )
+                                    | Ver Historial

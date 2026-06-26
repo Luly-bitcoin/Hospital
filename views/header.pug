@@ -1,0 +1,46 @@
+header.header
+
+    .logo
+        a(href="/dashboard") 
+            img(src="/img/logo.png")
+            link(rel="stylesheet", href="/css/dashboard.css")
+        
+
+    .header-center
+
+        .titulo
+            h1 Hospital Information System
+
+        nav.menu
+
+            if rol != 5
+                a(href="/pacientes") Pacientes
+
+            a(href="/camas") Camas
+
+            if rol == 1 || rol == 4
+                a(href="/admisiones") Admisiones
+
+            if rol == 1 || rol == 2
+                a(href="/enfermeria") Enfermería
+
+            if rol == 1 || rol == 3
+                a(href="/medico") A medicar
+
+            if rol == 1 || rol == 2 || rol == 3
+                a(href="/historial") Historial Clínico
+
+            if rol != 5
+                a(href="/turnos") Turnos
+
+            if rol != 5
+                a(href="/medicos") Médicos
+
+            if rol == 1 || rol == 2 || rol == 3
+                a(href="/altas") Dar Alta
+
+    .usuario
+        a(href="/perfil")
+            img(src="/img/user.png")
+
+        span= usuario

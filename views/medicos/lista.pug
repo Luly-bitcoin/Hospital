@@ -2,31 +2,50 @@ doctype html
 html
     head
         title Médicos
+        link(
+            rel="stylesheet"
+            href="/css/style.css"
+        )
 
     body
 
-        h1 Médicos
+        include ../header
 
-        a(href="/medicos/nuevo")
-            | Nuevo Médico
+        .contenedor
 
-        br
-        br
+            h1 Médicos
 
-        table(border="1")
+            .acciones
 
-            tr
-                th DNI
-                th Nombre
-                th Especialidad
-                th Matrícula
-                th Estado
+                a.btn.btn-circle.btn-primary(
+                    href="/dashboard"
+                )
+                    | Inicio
 
-            each medico in medicos
+                a.btn.btn-circle.btn-success(
+                    href="/medicos/nuevo"
+                )
+                    | Nuevo Médico
+
+            table
 
                 tr
-                    td= medico.dni
-                    td= medico.apellido + ", " + medico.nombre
-                    td= medico.especialidad
-                    td= medico.matricula
-                    td= medico.estado
+                    th DNI
+                    th Nombre
+                    th Especialidad
+                    th Matrícula
+                    th Estado
+
+                each medico in medicos
+
+                    tr
+                        td= medico.dni
+                        td= medico.apellido + ", " + medico.nombre
+                        td= medico.especialidad
+                        td= medico.matricula
+
+                        td
+                            if medico.estado == "activo"
+                                span.estado-activo Activo
+                            else
+                                span.estado-inactivo Inactivo

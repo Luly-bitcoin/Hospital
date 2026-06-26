@@ -6,14 +6,14 @@ import {
     guardarAdmision
 } from "../controllers/admisionesController.js";
 
-import { verificarSesion } from "../middlewares/authMiddlewares.js";
+import { verificarSesion, permitirRoles } from "../middlewares/authMiddlewares.js";
 
 const router = Router();
 
-router.get("/", verificarSesion, listarAdmisiones);
+router.get("/", verificarSesion, permitirRoles(1, 4), listarAdmisiones);
 
-router.get("/nueva", verificarSesion, mostrarNuevaAdmision);
+router.get("/nueva", verificarSesion, permitirRoles(1, 4), mostrarNuevaAdmision);
 
-router.post("/nueva", verificarSesion, guardarAdmision);
+router.post("/nueva", verificarSesion, permitirRoles(1, 4), guardarAdmision);
 
 export default router;

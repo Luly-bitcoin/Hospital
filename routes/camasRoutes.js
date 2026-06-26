@@ -3,10 +3,11 @@ import {
     verCamas,
     crearAla,
     crearHabitacion,
-    crearCama
+    crearCama,
+    limpiarCama
 } from "../controllers/camasController.js";
 
-import { verificarSesion } from "../middlewares/authMiddlewares.js";
+import { verificarSesion, soloLimpieza } from "../middlewares/authMiddlewares.js";
 
 const router = Router();
 
@@ -32,6 +33,13 @@ router.post(
     "/cama",
     verificarSesion,
     crearCama
+);
+
+router.post(
+    "/limpiar/:id",
+    verificarSesion,
+    soloLimpieza,
+    limpiarCama
 );
 
 export default router;

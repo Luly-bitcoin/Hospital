@@ -87,3 +87,57 @@ async function crearAla(){
         alert("Error al crear ala");
     }
 }
+
+async function limpiarCama(idCama){
+
+    if(ROL_USUARIO !== 5){
+        return;
+    }
+
+    const cama =
+    document.querySelector(
+        `[data-id="${idCama}"]`
+    );
+
+    if(
+        !cama.classList.contains(
+            "higienizando"
+        )
+    ){
+        return;
+    }
+
+    const confirmar =
+    confirm(
+        "¿Está seguro de que la cama ya está limpia?"
+    );
+
+    if(!confirmar){
+        return;
+    }
+
+    const res =
+    await fetch(
+        `/camas/limpiar/${idCama}`,
+        {
+            method:"POST"
+        }
+    );
+
+    if(res.ok){
+
+        alert(
+            "Cama marcada como limpia"
+        );
+
+        location.reload();
+
+    }else{
+
+        alert(
+            "Error al actualizar cama"
+        );
+
+    }
+
+}

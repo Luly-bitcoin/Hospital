@@ -2,14 +2,25 @@ doctype html
 html
     head
         title Emergencias
-        link(rel="stylesheet", href="/css/emergencias.css")
+        link(rel="stylesheet", href="/css/style.css")
 
     body
 
-        h1 Emergencias
+        .header-emergencias
 
-        a(href="/emergencias/nuevo")
-            | Nueva Emergencia
+            h1 Emergencias
+
+            .acciones.superiores
+                a.btn.btn-circle.btn-success(
+                    href="/emergencias/nuevo"
+                )
+                    | Nueva Emergencia
+
+                a.btn.btn-circle.btn-primary(
+                    href="/dashboard"
+                )
+                    | Volver
+
 
         br
         br
@@ -18,6 +29,7 @@ html
 
             tr
                 th Código
+                th Descripción
                 th Estado
                 th Cama
                 th Paciente
@@ -28,6 +40,8 @@ html
                 tr
 
                     td= e.codigo_temporal
+
+                    td= e.descripcion
 
                     td= e.estado
 
@@ -42,7 +56,19 @@ html
                     td
                         if e.estado == "sin_identificar"
 
-                            a(
+                            a.btn-identificar(
                                 href=`/emergencias/identificar/${e.id_emergencia}`
                             )
-                                | Identificar
+                                | Identificar 
+
+                        else 
+                            a.btn.btn-small.btn-orange(
+                                href=`/emergencias/cambiar-cama/${e.id_emergencia}`
+                            )
+                                | Cambiar Cama
+
+                            a.btn.btn-small.btn-danger(
+                                href=`/emergencias/alta/${e.id_emergencia}`
+                                onclick="return confirm('¿Estás seguro de que deseas dar de alta esta emergencia?')"
+                            )
+                                | Dar Alta

@@ -5,31 +5,53 @@ html(lang="es")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title HIS Dashboard
 
-        link(rel="stylesheet" href="/css/dashboard.css")
+        link(rel="stylesheet" href="/css/hospital.css")
 
     body
 
         header.header
 
             .logo
-                img(src="/img/logo.png")
+                a(href="/dashboard")
+                    img(src="/img/logo.png")
 
             .header-center
+
                 .titulo
                     h1 Hospital Information System
 
                 nav.menu
-                    a(href="/pacientes") Pacientes
+
+                    if rol != 5
+                        a(href="/pacientes") Pacientes
+
                     a(href="/camas") Camas
-                    a(href="/admisiones") Admisiones
-                    a(href="/enfermeria") Enfermería
-                    a(href="/medico") Médico
-                    a(href="/turnos") Turnos
-                    a(href="/reportes") Reportes
+
+                    if rol == 1 || rol == 4
+                        a(href="/admisiones") Admisiones
+
+                    if rol == 1 || rol == 2
+                        a(href="/enfermeria") Enfermería
+
+                    if rol == 1 || rol == 3
+                        a(href="/medico") A medicar
+
+                    if rol == 1 || rol == 2 || rol == 3
+                        a(href="/historial") Historial Clínico
+
+                    if rol != 5
+                        a(href="/turnos") Turnos
+
+                    if rol != 5
+                        a(href="/medicos") Médicos
+
+                    if rol == 1 || rol == 2 || rol == 3
+                        a(href="/altas") Dar Alta
 
             .usuario
                 a(href="/perfil")
                     img(src="/img/user.png")
+
                 span= usuario
 
         main.dashboard
@@ -64,8 +86,10 @@ html(lang="es")
                 .imagen.centro
                     img(src="/img/hospital2.jpg")
 
-                    a.btn-emergencia(href="/emergencias")
-                        | EMERGENCIA
+                    
+                    if rol != 5
+                        a.btn.btn-danger.btn-large.btn-circle.btn-emergencia(href="/emergencias")
+                            | EMERGENCIA
 
                 .imagen
                     img(src="/img/hospital3.jpg")

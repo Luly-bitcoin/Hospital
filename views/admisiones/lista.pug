@@ -6,21 +6,19 @@ html(lang="es")
 
         title Admisiones
 
-        link(rel="stylesheet" href="/css/admisiones.css")
+        link(rel="stylesheet" href="/css/style.css")
 
     body
 
+        include ../header
+
         .contenedor
 
-            aside.menu-lateral
+            a.btn.btn-circle.btn-primary(href="/dashboard")
+                | Inicio
 
-                h2 Admisiones
-
-                a.btn-menu(href="/dashboard")
-                    | Inicio
-
-                a.btn-menu.btn-nueva(href="/admisiones/nueva")
-                    | + Nueva Admisión
+            a.btn.btn-circle.btn-success(href="/admisiones/nueva")
+                | Nueva Admisión
 
             main.contenido
 
