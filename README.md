@@ -20,43 +20,19 @@ Tecnologías utilizadas
 * CSS3
 * JavaScript
 
----
 
-# Arquitectura
+Funcionalidades
 
-El proyecto sigue una arquitectura MVC (Modelo - Vista - Controlador).
-
-La estructura principal es:
-
-```
-config/
-controllers/
-middlewares/
-models/
-public/
-    css/
-    img/
-    js/
-routes/
-views/
-app.js
-package.json
-```
-
----
-
-# Funcionalidades
-
-## Autenticación
+ Autenticación
 
 * Inicio de sesión mediante usuario y contraseña.
 * Contraseñas encriptadas con bcrypt.
 * Manejo de sesiones mediante express-session.
 * Control de acceso según el rol del usuario.
 
----
 
-## Gestión de Pacientes
+
+ Gestión de Pacientes
 
 Permite:
 
@@ -65,9 +41,9 @@ Permite:
 * Buscar pacientes.
 * Consultar historial.
 
----
 
-## Gestión de Camas
+
+ Gestión de Camas
 
 El sistema administra:
 
@@ -80,7 +56,6 @@ Cada cama puede encontrarse en alguno de los siguientes estados:
 * Libre
 * Ocupada
 * Higienizando
-* Mantenimiento
 
 Además permite:
 
@@ -89,9 +64,8 @@ Además permite:
 * Visualizar disponibilidad.
 * Filtrar camas por estado.
 
----
 
-## Admisiones
+Admisiones
 
 Permite registrar una nueva internación indicando:
 
@@ -100,11 +74,11 @@ Permite registrar una nueva internación indicando:
 * Fecha de ingreso
 * Cama asignada
 
----
 
-## Emergencias
 
-Permite registrar pacientes provenientes de guardia.
+Emergencias
+
+Permite registrar a pacientes no identificados.
 
 Incluye:
 
@@ -113,9 +87,9 @@ Incluye:
 * Identificación posterior
 * Asignación de cama
 
----
 
-## Evaluación Inicial de Enfermería
+
+Evaluación Inicial de Enfermería
 
 Registro de información clínica inicial:
 
@@ -126,9 +100,9 @@ Registro de información clínica inicial:
 * Antecedentes
 * Observaciones
 
----
 
-## Evaluación Médica
+
+Evaluación Médica
 
 Permite registrar:
 
@@ -137,9 +111,8 @@ Permite registrar:
 * Medicación
 * Indicaciones médicas
 
----
 
-## Historial Clínico
+Historial Clínico
 
 El sistema conserva el historial completo del paciente, mostrando:
 
@@ -148,9 +121,8 @@ El sistema conserva el historial completo del paciente, mostrando:
 * Evaluaciones médicas
 * Altas hospitalarias
 
----
 
-## Altas Hospitalarias
+Altas Hospitalarias
 
 Permite registrar:
 
@@ -163,9 +135,8 @@ Al finalizar una internación:
 * se libera automáticamente la cama
 * la cama pasa al estado Higienizando
 
----
 
-## Gestión de Usuarios
+Gestión de Usuarios
 
 Cada usuario posee:
 
@@ -182,19 +153,17 @@ También puede:
 
 * Editar perfil
 * Cambiar contraseña
-* Cambiar rol (Administrador)
+* Cambiar rol
 
----
 
-# Roles del sistema
+Roles del sistema
 
-## Administrador
+# Administrador
 
 Acceso completo al sistema.
 
----
 
-## Admisión
+# Admisión
 
 Puede acceder a:
 
@@ -211,9 +180,8 @@ No puede acceder a:
 * Historial Clínico
 * Altas
 
----
 
-## Enfermería
+# Enfermería
 
 Puede acceder a:
 
@@ -229,9 +197,7 @@ No puede acceder a:
 * Admisiones
 * A medicar
 
----
-
-## Médico
+# Médico
 
 Puede acceder a:
 
@@ -247,9 +213,8 @@ No puede acceder a:
 * Admisiones
 * Enfermería
 
----
 
-## Limpieza
+# Limpieza
 
 Puede acceder únicamente a:
 
@@ -257,9 +222,8 @@ Puede acceder únicamente a:
 
 Visualiza solamente las camas para gestionar el estado de higienización.
 
----
 
-# Seguridad
+Seguridad
 
 El sistema implementa:
 
@@ -270,57 +234,35 @@ El sistema implementa:
 * Validaciones de formularios.
 * Consultas SQL parametrizadas para evitar SQL Injection.
 
----
 
 # Instalación
 
-## 1. Clonar el proyecto
+1. Clonar el proyecto
 
-```
-git clone <repositorio>
-```
+git clone "https://github.com/Luly-bitcoin/Hospital.git"
 
-## 2. Instalar dependencias
 
-```
+2. Instalar dependencias
+
 npm install
-```
 
-## 3. Configurar la base de datos
+3. Configurar la base de datos
 
 Crear la base de datos MySQL e importar el script SQL correspondiente.
 
 Configurar la conexión en:
 
-```
 config/db.js
-```
 
----
+4. Ejecutar el servidor
 
-## 4. Ejecutar el servidor
-
-```
-npm start
-```
-
-o
-
-```
 node app.js
-```
 
----
 
-# Credenciales
 
-Crear un usuario administrador directamente desde la base de datos o mediante el registro inicial.
+Autor
 
----
-
-# Autor
-
-**Lourdes**
+# Lourdes
 
 Trabajo Práctico Integrador
 
