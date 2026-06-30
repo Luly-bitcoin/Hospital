@@ -950,3 +950,10 @@ tbody tr:hover{
     transform:scale(1.1);
     background:#c62828;
 }
+.contenedor-rol{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+
+}

@@ -6,81 +6,79 @@ html(lang="es")
 
         title Cambiar Rol
 
-        link(
-            rel="stylesheet"
-            href="/css/perfil.css"
-        )
-
+        link(rel="stylesheet", href="/css/hospital.css")
     body
 
-        .perfil-card
+        .contenedor-rol
 
-            h1 Cambiar Rol
+            .perfil-card
 
-            if(error)
-                .error= error
+                h1 Cambiar Rol
 
-            if(success)
-                .success= success
+                if(error)
+                    .error= error
 
-            form(
-                action="/perfil/cambiar-rol"
-                method="POST"
-            )
+                if(success)
+                    .success= success
 
-                .grupo
-                    label Rol Actual
+                form(
+                    action="/perfil/cambiar-rol"
+                    method="POST"
+                )
 
-                    input(
-                        type="text"
-                        value=usuario.rol
-                        readonly
-                    )
+                    .grupo
+                        label Rol Actual
 
-                .grupo
-                    label Nuevo Rol
+                        input(
+                            type="text"
+                            value=usuario.rol
+                            readonly
+                        )
 
-                    select.rol-select(
-                        name="rol"
-                        required
-                    )
+                    .grupo
+                        label Nuevo Rol
 
-                        option(value="")
-                            | Seleccionar
+                        select.rol-select(
+                            name="rol"
+                            required
+                        )
 
-                        option(value="ADMIN")
-                            | Administrador
+                            option(value="")
+                                | Seleccionar
 
-                        option(value="ADMISION")
-                            | Admisión
+                            option(value="ADMIN")
+                                | Administrador
 
-                        option(value="ENFERMERIA")
-                            | Enfermería
+                            option(value="ADMISION")
+                                | Admisión
 
-                        option(value="MEDICO")
-                            | Médico
+                            option(value="ENFERMERIA")
+                                | Enfermería
 
-                        option(value="LIMPIEZA")
-                            | Limpieza
+                            option(value="MEDICO")
+                                | Médico
 
-                .grupo
-                    label Código del Rol
+                            option(value="LIMPIEZA")
+                                | Limpieza
 
-                    input(
-                        type="password"
-                        name="codigoRol"
-                        placeholder="Ingrese el código del rol"
-                        required
-                    )
+                    .grupo
+                        label Código del Rol
 
-                .acciones
+                        input(
+                            type="password"
+                            name="codigoRol"
+                            placeholder="Ingrese el código del rol"
+                            required
+                        )
 
-                    button.btn-principal(
-                        type="submit"
-                    )
-                        | Guardar Cambios
+                    .acciones
 
-                    a.btn-volver(
-                        href="/perfil"
-                    )
-                        | Cancelar
+                        button.btn.btn-circle.btn-success(
+                            type="submit"
+                        )
+                            | Guardar Cambios
+
+                        a.btn.btn-circle.btn-danger(
+                            href="/perfil"
+                        )
+                            | Cancelar
