@@ -3,7 +3,9 @@ import { Router } from "express";
 import {
     listarMedicos,
     mostrarFormulario,
-    guardarMedico
+    guardarMedico,
+    buscarMedicoPorDni,
+    cambiarEstadoMedico
 } from "../controllers/medicosController.js";
 
 import { verificarSesion, permitirRoles } from "../middlewares/authMiddlewares.js";
@@ -29,6 +31,16 @@ router.post(
     verificarSesion,
     permitirRoles(1, 2, 3, 4),
     guardarMedico
+);
+
+router.get(
+    "/buscar-dni/:dni",
+    buscarMedicoPorDni
+);
+
+router.post(
+    "/estado/:dni", 
+    cambiarEstadoMedico
 );
 
 export default router;

@@ -1,5 +1,22 @@
 import pool from "../config/db.js";
 
+function formatearFecha(fecha) {
+
+    if (!fecha) return "-";
+
+    const f = new Date(fecha);
+
+    const dia = String(f.getDate()).padStart(2, "0");
+    const mes = String(f.getMonth() + 1).padStart(2, "0");
+    const anio = f.getFullYear();
+
+    const horas = String(f.getHours()).padStart(2, "0");
+    const minutos = String(f.getMinutes()).padStart(2, "0");
+
+    return `${dia}/${mes}/${anio} ${horas}:${minutos} hs`;
+
+}
+
 export const buscarPaciente = async (req, res) => {
 
     const [pacientes] = await pool.query(`
@@ -61,6 +78,13 @@ export const verHistorial = async (req, res) => {
 
         ORDER BY a.fecha_ingreso DESC
     `,[dni]);
+
+    internaciones.forEach(item => {
+
+        item.fecha_ingreso = formatearFecha(item.fecha_ingreso);
+        item.fecha_alta = formatearFecha(item.fecha_alta);
+
+    });
 
     res.render(
         "historial/ver",

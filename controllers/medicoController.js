@@ -11,7 +11,10 @@ export const listarPacientes = async (req, res) => {
         FROM admisiones a
         JOIN pacientes p
             ON p.dni = a.dni_paciente
-        WHERE a.estado='activa'
+        LEFT JOIN evaluacion_medica e
+            ON e.id_admision = a.id_admision
+        WHERE a.estado = 'activa'
+        AND e.id_admision IS NULL
     `);
 
         pacientes.forEach(paciente => {

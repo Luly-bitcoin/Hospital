@@ -38,9 +38,17 @@ export const listarAdmisiones = async (req, res) => {
 export const mostrarNuevaAdmision = async (req, res) => {
 
     const [pacientes] = await pool.query(`
-        SELECT *
-        FROM pacientes
-        WHERE activo = 1
+        SELECT
+            p.dni,
+            p.nombre,
+            p.apellido
+        FROM pacientes p
+        WHERE p.activo = 1
+        AND p.dni NOT IN (
+            SELECT a.dni_paciente
+            FROM admisiones a
+            WHERE a.estado = 'activa'
+        )
     `);
 
    const [camas] = await pool.query(`

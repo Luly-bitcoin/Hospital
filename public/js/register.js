@@ -70,18 +70,18 @@ form.addEventListener(
 const rol =
 document.querySelector("#rol");
 
-const grupoEspecialidad =
-document.querySelector("#grupoEspecialidad");
+const grupoDatosMedico =
+document.querySelector("#grupoDatosMedico");
 
 function actualizarCamposRol(){
 
     if(rol.value === "MEDICO"){
 
-        grupoEspecialidad.style.display = "block";
+        grupoDatosMedico.style.display = "block";
 
     }else{
 
-        grupoEspecialidad.style.display = "none";
+        grupoDatosMedico.style.display = "none";
 
     }
 
@@ -91,5 +91,43 @@ rol.addEventListener(
     "change",
     actualizarCamposRol
 );
+
+const inputDni =
+document.querySelector('[name="dni"]');
+
+inputDni.addEventListener(
+    "blur",
+    buscarMedico
+);
+
+async function buscarMedico(){
+
+    if(rol.value !== "MEDICO"){
+        return;
+    }
+
+    const dni = inputDni.value.trim();
+
+    if(dni.length < 7){
+        return;
+    }
+
+    try{
+
+        const respuesta =
+        await fetch(`/medicos/buscar-dni/${dni}`);
+
+        const datos =
+        await respuesta.json();
+
+        console.log(datos);
+
+    }catch(error){
+
+        console.error(error);
+
+    }
+
+}
 
 actualizarCamposRol();

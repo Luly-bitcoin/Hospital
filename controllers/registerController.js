@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 
 export const mostrarRegistro = (req, res) => {
 
-    res.render("register", {
+    res.render("register/register", {
         error: null
     });
 
@@ -19,6 +19,9 @@ export const registrarUsuario = async (req, res) => {
             dni,
             matricula,
             especialidad,
+            sexo,
+            fecha_nacimiento,
+            telefono,
             email,
             usuario,
             password,
@@ -26,7 +29,6 @@ export const registrarUsuario = async (req, res) => {
             rol,
             codigoRol
         } = req.body;
-
         if(
             !nombre ||
             !apellido ||
@@ -38,17 +40,21 @@ export const registrarUsuario = async (req, res) => {
             !rol ||
             !codigoRol
         ){
-            return res.render("register",{
+            return res.render("register/register",{
                 error:"Todos los campos son obligatorios"
             });
         }
 
         if(
             rol === "MEDICO" &&
-            !especialidad
+            (
+            !especialidad ||
+            !sexo ||
+            !fecha_nacimiento
+            )
         ){
-            return res.render("register",{
-                error:"Debe indicar una especialidad médica"
+            return res.render("register/register",{
+                error:"Complete los campos de rol médico."
             });
         }
 
@@ -56,25 +62,25 @@ export const registrarUsuario = async (req, res) => {
         /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
 
         if(!soloTexto.test(nombre)){
-            return res.render("register",{
+            return res.render("register/register",{
                 error:"Nombre inválido"
             });
         }
 
         if(!soloTexto.test(apellido)){
-            return res.render("register",{
+            return res.render("register/register",{
                 error:"Apellido inválido"
             });
         }
 
         if(!/^\d{7,8}$/.test(dni)){
-            return res.render("register",{
+            return res.render("register/register",{
                 error:"DNI inválido"
             });
         }
 
         if(password !== confirmPassword){
-            return res.render("register",{
+            return res.render("register/register",{
                 error:"Las contraseñas no coinciden"
             });
         }
@@ -90,7 +96,7 @@ export const registrarUsuario = async (req, res) => {
         );
 
         if(roles.length === 0){
-            return res.render("register",{
+            return res.render("register/register",{
                 error:"Rol inválido"
             });
         }
@@ -111,7 +117,7 @@ export const registrarUsuario = async (req, res) => {
         );
 
         if(codigos.length === 0){
-            return res.render("register",{
+            return res.render("register/register",{
                 error:"Código de rol incorrecto"
             });
         }
@@ -127,7 +133,7 @@ export const registrarUsuario = async (req, res) => {
         );
 
         if(usuarios.length > 0){
-            return res.render("register",{
+            return res.render("register/register",{
                 error:"El usuario ya existe"
             });
         }
@@ -176,23 +182,31 @@ export const registrarUsuario = async (req, res) => {
             if(medicos.length === 0){
 
                 await pool.query(`
-                    INSERT INTO medicos
-                    (
-                        dni,
-                        nombre,
-                        apellido,
-                        especialidad,
-                        matricula,
-                        estado
-                    )
-                    VALUES
-                    (
-                        ?,?,?,?,?,?
-                    )
+                INSERT INTO medicos
+                (
+                    dni,
+                    nombre,
+                    apellido,
+                    sexo,
+                    fecha_nacimiento,
+                    telefono,
+                    correo_electronico,
+                    especialidad,
+                    matricula,
+                    estado
+                )
+                VALUES
+                (
+                ?,?,?,?,?,?,?,?,?,?
+                )
                 `,[
                     dni,
                     nombre,
                     apellido,
+                    sexo,
+                    fecha_nacimiento,
+                    telefono || null,
+                    email,
                     especialidad,
                     matricula,
                     "activo"
@@ -208,7 +222,7 @@ export const registrarUsuario = async (req, res) => {
 
         console.log(error);
 
-        res.render("register",{
+        res.render("register/register",{
             error:"Error al registrar usuario"
         });
 

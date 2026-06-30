@@ -34,6 +34,8 @@ html
                     th Nombre
                     th Especialidad
                     th Matrícula
+                    th Correo
+                    th Teléfono
                     th Estado
 
                 each medico in medicos
@@ -43,9 +45,20 @@ html
                         td= medico.apellido + ", " + medico.nombre
                         td= medico.especialidad
                         td= medico.matricula
+                        td= medico.correo_electronico
+                        td= medico.telefono
 
                         td
                             if medico.estado == "activo"
-                                span.estado-activo Activo
+                                button.btn.btn-circle.btn-primary.btn-estado(
+                                    data-id=medico.dni 
+                                    data-estado="activo"
+                                )
+                                    | Activo
                             else
-                                span.estado-inactivo Inactivo
+                                button.btn.btn-circle.btn-danger.btn-estado(
+                                    data-id=medico.dni 
+                                    data-estado="inactivo"
+                                )
+                                    | Inactivo
+    script(src="/js/medicos.js")

@@ -71,3 +71,61 @@ export const guardarMedico = async (req, res) => {
 
     res.redirect("/medicos");
 };
+
+export const buscarMedicoPorDni = async (req, res) => {
+
+    try{
+
+        const { dni } = req.params;
+
+        const [medicos] = await pool.query(`
+            SELECT *
+            FROM medicos
+            WHERE dni = ?
+        `,[dni]);
+
+        if(medicos.length === 0){
+
+            return res.json({
+                existe:false
+            });
+
+        }
+
+        return res.json({
+            existe:true,
+            medico:medicos[0]
+        });
+
+    }catch(error){
+
+        console.log(error);
+
+        res.status(500).json({
+            existe:false
+        });
+
+    }
+
+};
+
+export const cambiarEstadoMedico = async (req, res) => {
+
+    try {
+
+        const { dni } = req.params;
+        const { estado } = req.body;
+
+        await pool.query(`
+            UPDATE medicos
+            SET estado = ?
+            WHERE dni = ?
+        `, [estado, dni]);
+
+        res.sendStatus(200);
+
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(500);
+    }
+};

@@ -12,9 +12,11 @@ export const listarPacientesInternados = async (req, res) => {
         FROM admisiones a
         JOIN pacientes p
             ON p.dni = a.dni_paciente
-        WHERE a.estado='activa'
+        LEFT JOIN evaluacion_enfermeria e
+            ON e.id_admision = a.id_admision
+        WHERE a.estado = 'activa'
+        AND e.id_admision IS NULL
     `);
-
     pacientes.forEach(paciente => {
 
         const fecha = new Date(paciente.fecha_ingreso);
@@ -79,9 +81,11 @@ export const guardarEvaluacion = async (req, res) => {
             signos_vitales_temp,
             signos_vitales_fc,
             signos_vitales_fr,
-            signos_vitales_pa
+            signos_vitales_pa,
+            fecha_registro,
+            usuario_registra
         )
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?)
     `,[
         id_admision,
         antecedentes,
@@ -91,7 +95,8 @@ export const guardarEvaluacion = async (req, res) => {
         temperatura,
         frecuencia_cardiaca,
         frecuencia_respiratoria,
-        presion
+        presion,
+        req.session.usuario.id 
     ]);
 
     res.redirect("/enfermeria");

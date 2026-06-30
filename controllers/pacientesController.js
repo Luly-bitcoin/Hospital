@@ -39,6 +39,20 @@ export const agregarPaciente = async (req, res) => {
         return res.status(400).json({ error: "Datos inválidos" });
     }
 
+    const [pacientes] = await pool.query(`
+        SELECT *
+        FROM pacientes
+        WHERE dni = ?
+    `, [dni]);
+
+    if(pacientes.length > 0){
+
+        return res.render("pacientes/agregar",{
+            error: "Ya existe un paciente registrado con ese DNI."
+        });
+
+    }
+
     await pool.query(
         `
         INSERT INTO pacientes

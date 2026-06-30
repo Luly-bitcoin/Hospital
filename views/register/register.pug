@@ -5,7 +5,8 @@ html(lang="es")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title Registro HIS
 
-        link(rel="stylesheet" href="/css/register.css")
+        link(rel="stylesheet" href="/css/style.css")
+        link(rel="stylesheet", href="/css/login.css")
 
     body
 
@@ -144,16 +145,42 @@ html(lang="es")
 
                             option(value="LIMPIEZA")
                                 | Limpieza
+                    
+                    #grupoDatosMedico(style="display:none;")
 
-                    #grupoEspecialidad.grupo(style="display:none;")
+                        .grupo
+                            label Especialidad
 
-                        label Especialidad
+                            input(
+                                type="text"
+                                name="especialidad"
+                                placeholder="Ej: Cardiología"
+                            )
 
-                        input(
-                            type="text"
-                            name="especialidad"
-                            placeholder="Ej: Cardiología"
-                        )
+                        .grupo
+                            label Sexo
+
+                            select(name="sexo")
+                                option(value="") Seleccionar
+                                option(value="M") Masculino
+                                option(value="F") Femenino
+
+                        .grupo
+                            label Fecha de nacimiento
+
+                            input(
+                                type="date"
+                                name="fecha_nacimiento"
+                            )
+
+                        .grupo
+                            label Teléfono
+
+                            input(
+                                type="text"
+                                name="telefono"
+                                placeholder="Ingrese teléfono"
+                            )
 
                     .grupo
 
@@ -166,10 +193,10 @@ html(lang="es")
                             required
                         )
 
-                    button.btn-registrar(type="submit")
+                    button.btn.btn-full.btn-success(type="submit")
                         | Registrar Usuario
 
-                a.btn-volver(href="/")
+                a.btn.btn-full.btn-primary(href="/")
                     | Volver al Login
 
         script(src="/js/register.js")

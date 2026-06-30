@@ -15,6 +15,9 @@ html(lang="es")
 
                 h1 Nuevo Paciente
 
+                if(error)
+                    p.mensaje-error= error
+
                 form(action="/pacientes/nuevo" method="POST")
 
                     .grupo

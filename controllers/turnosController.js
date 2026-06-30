@@ -80,6 +80,16 @@ export const guardarTurno = async (req, res) => {
 
     }
 
+    const [[medico]] = await pool.query(`
+        SELECT estado
+        FROM medicos
+        WHERE id_medico = ?
+    `, [id_medico]);
+
+    if (!medico || medico.estado !== "activo") {
+        return res.send("El médico no está disponible para turnos");
+    }
+
     await pool.query(`
         INSERT INTO turnos
         (
